@@ -149,6 +149,13 @@
                 </li>
 
                 <li>
+                    <a href="<?= base_url("ogrenci"); ?>">
+                        <i class="menu-icon fa fa-user-secret"></i>
+                        <span class="menu-text">Ögrenci Kayıt</span>
+                    </a>
+                </li>
+
+                <li>
                     <a href="<?= base_url("users"); ?>">
                         <i class="menu-icon fa fa-user-secret"></i>
                         <span class="menu-text">Kullanıcılar</span>

@@ -73,6 +73,7 @@ $(document).ready(function () {
     })
 
 
+
     /** slayt button özelliği aktif veya pasif yapmak için */
     $(".button_usage_btn").change(function () {
         $(".button-information-container").slideToggle();
@@ -103,6 +104,17 @@ $(document).ready(function () {
             $(".sortable").sortable();
         });
 
+    });
+
+    /** Fakülte Bölüm Seçmek için  */
+    $(".categori_sec").on("change" ,".catSec", function () {
+        // var $data = $(this).prop("checked");
+        // var $data_url  = $(this).data("url");
+        //
+        // if (typeof $data !== "undefined" && typeof $data_url !== "undefined") {
+        //     $.post($data_url,{data : $data}, function (response) {})
+        // }
+        alert("oldu bişiler");
     });
 
 

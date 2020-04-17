@@ -37,6 +37,19 @@
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label for="category_id">Bölüm Türü</label>
+                            <select name="bolum_turu" class="form-control"  id="bolum_turu">
+                                <option value="1" <?= ($item->bolum_turu == '1') ? 'selected' : null; ?>>N.Ö</option>
+                                <option value="2" <?= ($item->bolum_turu == '2') ? 'selected' : null; ?>>İ.Ö</option>
+                            </select>
+                            <?php if (isset($form_error)){ ?>
+                                <small class="input-form-error pull-right"><?= form_error("bolum_turu"); ?></small>
+                            <?php } ?>
+                        </div>
+                    </div>
+
                     <button type="submit" class="btn btn-primary btn-md btn-outline">Güncelle</button>
                     <a href="<?= base_url("portfolio"); ?>" class="btn btn-md btn-danger btn-outline">İptal</a>
                 </form>

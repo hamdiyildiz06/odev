@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Portfolio extends CI_Controller{
+class Ogrenci extends CI_Controller{
 
     public $viewFolder = "";
 
@@ -9,8 +9,8 @@ class Portfolio extends CI_Controller{
     {
         parent::__construct();
 
-        $this->viewFolder = "portfolio_v";
-        $this->load->model("portfolio_model");
+        $this->viewFolder = "ogrenci_v";
+        $this->load->model("ogrenci_model");
         $this->load->model("portfolio_image_model");
         $this->load->model("portfolio_category_model");
         if (!get_active_user()){
@@ -24,7 +24,7 @@ class Portfolio extends CI_Controller{
 
 
         /** tablodan verilerin getirilmesi */
-        $items = $this->portfolio_model->get_all(
+        $items = $this->ogrenci_model->get_all(
             array(),"rank ASC"
         );
 
@@ -69,12 +69,11 @@ class Portfolio extends CI_Controller{
         $validate = $this->form_validation->run();
 
         if($validate){
-            $insert = $this->portfolio_model->add(
+            $insert = $this->ogrenci_model->add(
                 array(
                     "title"        => $this->input->post("title"),
                     "url"          => convertToSEO($this->input->post("title")),
                     "category_id"  => $this->input->post("category_id"),
-                    "bolum_turu"  => $this->input->post("bolum_turu"),
                     "rank"         => 0,
                     "isActive"     => 1,
                     "createdAt"    => date("Y-m-d H:i:s ")
@@ -119,7 +118,7 @@ class Portfolio extends CI_Controller{
         $viewData = new stdClass();
 
         /** Tablodan verilerin getirilmesi ..*/
-        $item  =  $this->portfolio_model->get(
+        $item  =  $this->ogrenci_model->get(
             array(
                 "id" => $id
             )
@@ -158,7 +157,7 @@ class Portfolio extends CI_Controller{
         $validate = $this->form_validation->run();
 
         if($validate){
-            $update = $this->portfolio_model->update(
+            $update = $this->ogrenci_model->update(
                 array(
                     "id"          => $id
                 ),
@@ -166,7 +165,6 @@ class Portfolio extends CI_Controller{
                     "title"        => $this->input->post("title"),
                     "url"          => convertToSEO($this->input->post("title")),
                     "category_id"  => $this->input->post("category_id"),
-                    "bolum_turu"  => $this->input->post("bolum_turu"),
                 )
             );
 
@@ -193,7 +191,7 @@ class Portfolio extends CI_Controller{
             $viewData = new stdClass();
 
             /** Tablodan verilerin getirilmesi ..*/
-            $item  =  $this->portfolio_model->get(
+            $item  =  $this->ogrenci_model->get(
                 array(
                     "id" => $id
                 )
@@ -216,7 +214,7 @@ class Portfolio extends CI_Controller{
 
     public function delete($id){
 
-        $delete = $this->portfolio_model->delete(
+        $delete = $this->ogrenci_model->delete(
             array(
                 "id" => $id
             )
@@ -284,7 +282,7 @@ class Portfolio extends CI_Controller{
         if ($id){
             $isActive = ($this->input->post("data") === "true") ? 1 : 0;
 
-            $this->portfolio_model->update(
+            $this->ogrenci_model->update(
                 array(
                     "id" => $id,
                 ),
@@ -360,7 +358,7 @@ class Portfolio extends CI_Controller{
         $items = $order['ord'];
 
         foreach ($items as $rank => $id ){
-            $update = $this->portfolio_model->update(
+            $update = $this->ogrenci_model->update(
                 array(
                     "id"      => $id,
                     "rank !=" =>  $rank
@@ -397,7 +395,7 @@ class Portfolio extends CI_Controller{
         $viewData->viewFolder    = $this->viewFolder;
         $viewData->subViewFolder = "image";
 
-        $viewData->item = $this->portfolio_model->get(
+        $viewData->item = $this->ogrenci_model->get(
             array(
                 "id" => $id
             )
