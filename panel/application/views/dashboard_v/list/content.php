@@ -1,0 +1,1 @@
+buraya birşeyler yazalım gör
