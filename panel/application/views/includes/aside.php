@@ -111,12 +111,12 @@
                 <li class="has-submenu">
                     <a href="javascript:void(0)" class="submenu-toggle">
                         <i class="menu-icon fa fa-asterisk"></i>
-                        <span class="menu-text">Portfolio İşlemleri</span>
+                        <span class="menu-text">Fakülte ve Bölümler</span>
                         <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
                     </a>
                     <ul class="submenu">
-                        <li><a href="<?= base_url("portfolio_categories"); ?>"><span class="menu-text">Portfolio Kategori</span></a></li>
-                        <li><a href="<?= base_url("portfolio"); ?>"><span class="menu-text">Portfoliolar</span></a></li>
+                        <li><a href="<?= base_url("portfolio_categories"); ?>"><span class="menu-text">Fakülte Ekle</span></a></li>
+                        <li><a href="<?= base_url("portfolio"); ?>"><span class="menu-text">Bölüm ekle</span></a></li>
                     </ul>
                 </li>
 
@@ -144,7 +144,7 @@
                 <li>
                     <a href="<?= base_url("brands"); ?>">
                         <i class="menu-icon zmdi zmdi-puzzle-piece zmdi-hc-lg"></i>
-                        <span class="menu-text">Markalar</span>
+                        <span class="menu-text">Sınıf işlemleri</span>
                     </a>
                 </li>
 

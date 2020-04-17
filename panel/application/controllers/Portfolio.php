@@ -57,9 +57,6 @@ class Portfolio extends CI_Controller{
         // kurallar yazılır
         $this->form_validation->set_rules("title","Başlık","required|trim");
         $this->form_validation->set_rules("category_id","Kategori","required|trim");
-        $this->form_validation->set_rules("client","Müşteri","required|trim");
-        $this->form_validation->set_rules("finishedAt","Bitiş Tarihi","required|trim");
-
 
         //Hata mesajlarının Oluşturulması
         $this->form_validation->set_message(
@@ -75,13 +72,8 @@ class Portfolio extends CI_Controller{
             $insert = $this->portfolio_model->add(
                 array(
                     "title"        => $this->input->post("title"),
-                    "description"  => $this->input->post("description"),
                     "url"          => convertToSEO($this->input->post("title")),
-                    "client"       => $this->input->post("client"),
-                    "finishedAt"   => $this->input->post("finishedAt"),
                     "category_id"  => $this->input->post("category_id"),
-                    "place"        => $this->input->post("place"),
-                    "portfolio_url" => $this->input->post("portfolio_url"),
                     "rank"         => 0,
                     "isActive"     => 1,
                     "createdAt"    => date("Y-m-d H:i:s ")
@@ -153,9 +145,6 @@ class Portfolio extends CI_Controller{
         // kurallar yazılır
         $this->form_validation->set_rules("title","Başlık","required|trim");
         $this->form_validation->set_rules("category_id","Kategori","required|trim");
-        $this->form_validation->set_rules("client","Müşteri","required|trim");
-        $this->form_validation->set_rules("finishedAt","Bitiş Tarihi","required|trim");
-
 
         //Hata mesajlarının Oluşturulması
         $this->form_validation->set_message(
@@ -173,16 +162,10 @@ class Portfolio extends CI_Controller{
                     "id"          => $id
                 ),
                 array(
-                "title"        => $this->input->post("title"),
-                "description"  => $this->input->post("description"),
-                "url"          => convertToSEO($this->input->post("title")),
-                "client"       => $this->input->post("client"),
-                "finishedAt"   => $this->input->post("finishedAt"),
-                "category_id"  => $this->input->post("category_id"),
-                "place"        => $this->input->post("place"),
-                "portfolio_url" => $this->input->post("portfolio_url"),
+                    "title"        => $this->input->post("title"),
+                    "url"          => convertToSEO($this->input->post("title")),
+                    "category_id"  => $this->input->post("category_id"),
                 )
-
             );
 
             if($update){
@@ -207,7 +190,6 @@ class Portfolio extends CI_Controller{
         }else{
             $viewData = new stdClass();
 
-
             /** Tablodan verilerin getirilmesi ..*/
             $item  =  $this->portfolio_model->get(
                 array(
@@ -225,7 +207,6 @@ class Portfolio extends CI_Controller{
                     "isActive" => 1
                 )
             );
-
 
             $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
         }

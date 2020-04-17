@@ -48,21 +48,9 @@ class Brands extends CI_Controller{
     public function save(){
         $this->load->library("form_validation");
 
-
-        if ($_FILES["img_url"]["name"] == ""){
-            $alert = [
-                "title"    => "Bir Hata Oluştu!!!",
-                "message"  => "İşleminiz Tamamlanamadı Lütfen Bir Görsel Seçiniz ve Tekrar Deneyiniz",
-                "type"     => "error"
-            ];
-
-            $this->session->set_flashdata("alert", $alert);
-            redirect(base_url("brands/new_form"));
-            die();
-        }
-
         // kurallar yazılır
-        $this->form_validation->set_rules("title","Başlık","required|trim");
+        $this->form_validation->set_rules("title","Sınıf Adı","required|trim");
+        $this->form_validation->set_rules("mevcut","Sınıf Mevcudu","required|trim");
 
         //Hata mesajlarının Oluşturulması
         $this->form_validation->set_message(
@@ -77,15 +65,10 @@ class Brands extends CI_Controller{
 
         if($validate){
 
-            $file_name = convertToSEO(pathinfo($_FILES['img_url']['name'], PATHINFO_FILENAME)) . "." . pathinfo($_FILES['img_url']['name'], PATHINFO_EXTENSION);
-            $image_350x216 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/{$this->viewFolder}", 350,216, $file_name);
-
-            if($image_350x216){
-
                 $insert = $this->brand_model->add(
                     array(
                         "title"       => $this->input->post("title"),
-                        "img_url"     => $file_name,
+                        "mevcut"       => $this->input->post("mevcut"),
                         "rank"        => 0,
                         "isActive"    => 1,
                         "createdAt"   => date("Y-m-d H:i:s ")
@@ -111,20 +94,6 @@ class Brands extends CI_Controller{
 
                 }
 
-
-            }else{
-
-                $alert = [
-                    "title"    => "Bir Hata Oluştu!!!",
-                    "message"  => "İşleminiz Tamamlanamadı Lütfen Tekrar Deneyiniz",
-                    "type"     => "error"
-                ];
-
-                $this->session->set_flashdata("alert", $alert);
-                redirect(base_url("brands/new_form"));
-                die();
-
-            }
 
             $this->session->set_flashdata("alert", $alert);
             redirect(base_url("brands"));
@@ -163,7 +132,8 @@ class Brands extends CI_Controller{
         $this->load->library("form_validation");
 
         // kurallar yazılır
-        $this->form_validation->set_rules("title","Başlık","required|trim");
+        $this->form_validation->set_rules("title","Sınıf Adı","required|trim");
+        $this->form_validation->set_rules("mevcut","Sınıf Mevcudu","required|trim");
 
         //Hata mesajlarının Oluşturulması
         $this->form_validation->set_message(
@@ -177,36 +147,12 @@ class Brands extends CI_Controller{
 
         if($validate){
 
-            if ($_FILES["img_url"]["name"] !== ""){
 
-                $file_name = convertToSEO(pathinfo($_FILES['img_url']['name'], PATHINFO_FILENAME)) . "." . pathinfo($_FILES['img_url']['name'], PATHINFO_EXTENSION);
-                $image_350x216 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/{$this->viewFolder}", 350,216, $file_name);
+            $data =  array(
+                "title"       => $this->input->post("title"),
+                "mevcut"       => $this->input->post("mevcut"),
+            );
 
-                if($image_350x216){
-                    delete_picture("brand_model", $id, "350x216");
-                    $data =  array(
-                        "title"       => $this->input->post("title"),
-                        "img_url"   => $file_name,
-                    );
-
-                }else{
-                    $alert = [
-                        "title"    => "Bir Hata Oluştu!!!",
-                        "message"  => "İşleminiz Tamamlanamadı Lütfen Tekrar Deneyiniz",
-                        "type"     => "error"
-                    ];
-
-                    $this->session->set_flashdata("alert", $alert);
-                    redirect(base_url("brands/update_form/{$id}"));
-                    die();
-
-                }
-
-            }else{
-                $data =  array(
-                    "title"       => $this->input->post("title"),
-                );
-            }
 
             $update = $this->brand_model->update(array("id" => $id), $data);
 

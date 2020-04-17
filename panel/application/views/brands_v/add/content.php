@@ -11,17 +11,21 @@
                 <form action="<?= base_url("brands/save"); ?>" method="post" enctype="multipart/form-data">
 
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Başlık</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Başlık" name="title">
+                        <label for="exampleInputEmail1">Sınıf Adı</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Sınıf Adını Giriniz" name="title">
                         <?php if (isset($form_error)){ ?>
                             <small class="input-form-error pull-right"><?= form_error("title"); ?></small>
                         <?php } ?>
                     </div>
 
-                    <div class="form-group image_upload_container">
-                        <label for="exampleInputFile">Görsel Seçiniz</label>
-                        <input type="file" name="img_url" id="exampleInputFile" class="form-control">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Sınıf Mevcudu</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Sınıf Mevcudunu giriniz" name="mevcut">
+                        <?php if (isset($form_error)){ ?>
+                            <small class="input-form-error pull-right"><?= form_error("mevcut"); ?></small>
+                        <?php } ?>
                     </div>
+
 
                     <button type="submit" class="btn btn-primary btn-md btn-outline">Kaydet</button>
                     <a href="<?= base_url("brands"); ?>" class="btn btn-md btn-danger btn-outline">İptal</a>

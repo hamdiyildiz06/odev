@@ -19,8 +19,8 @@
                         <tr>
                             <th class="w50 text-center"><i class="fa fa-reorder"></i></th>
                             <th class="w50">#id</th>
-                            <th>Başlık</th>
-                            <th class="text-center">Görsel</th>
+                            <th>Sınıf Adı</th>
+                            <th class="text-center">Sınıf Mevcudu</th>
                             <th class="text-center">Durumu</th>
                             <th class="text-center">İşlemler</th>
                         </tr>
@@ -31,9 +31,8 @@
                         <th class="text-center"><i class="fa fa-reorder"></i></th>
                         <th class="text-center"><?= $item->id; ?></th>
                         <td><?= $item->title; ?></td>
-                        <td class="text-center w150">
-                            <img width="75" src="<?= get_picture($viewFolder,$item->img_url, "350x216"); ?>" alt="" class="img-rounded">
-                        </td>
+                        <td><?= $item->mevcut; ?></td>
+
                         <td class="text-center w100">
                             <input
                                     data-url="<?= base_url("brands/isActiveSetter/{$item->id}"); ?>"
