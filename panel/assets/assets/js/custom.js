@@ -24,6 +24,7 @@ $(document).ready(function () {
         var $data = $(this).prop("checked");
         var $data_url  = $(this).data("url");
 
+
         if (typeof $data !== "undefined" && typeof $data_url !== "undefined") {
             $.post($data_url,{data : $data}, function (response) {
 
@@ -32,7 +33,19 @@ $(document).ready(function () {
     });
 
 
+    $(".categoriSec").change(function () {
 
+       var $data  = $(this).val();
+       var $data_url = $(this).data("url") + $data;
+
+        if (typeof $data !== 'undefined' && typeof $data_url !== 'undefined' ){
+            $.post($data_url, { data : $data } , function (response) {
+
+                $(".bolumSec").html(response);
+
+            })
+        }
+    });
 
 
 
@@ -105,19 +118,6 @@ $(document).ready(function () {
         });
 
     });
-
-    /** Fakülte Bölüm Seçmek için  */
-    $(".categori_sec").on("change" ,".catSec", function () {
-        // var $data = $(this).prop("checked");
-        // var $data_url  = $(this).data("url");
-        //
-        // if (typeof $data !== "undefined" && typeof $data_url !== "undefined") {
-        //     $.post($data_url,{data : $data}, function (response) {})
-        // }
-        alert("oldu bişiler");
-    });
-
-
 
 
 

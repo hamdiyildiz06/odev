@@ -177,6 +177,47 @@ function get_category_title($category_id = 0){
         return "<strong style='color: red;'>Tanımlı Değil</strong>";
     }
 
+}
+
+function get_portfolyo_title($portfolyo_id = 0){
+
+    $t = get_instance();
+
+    $t->load->model("portfolio_model");
+
+    $portfolyo = $t->portfolio_model->get(
+        array(
+            "id" => $portfolyo_id
+        )
+    );
+
+    if($portfolyo){
+        return $portfolyo->title;
+    }else{
+        return "<strong style='color: red;'>Tanımlı Değil</strong>";
+    }
+
+
+}
+
+function get_brands_title($brands_id = 0){
+
+    $t = get_instance();
+
+    $t->load->model("brand_model");
+
+    $brands = $t->brand_model->get(
+        array(
+            "id" => $brands_id
+        )
+    );
+
+    if($brands){
+        return $brands->title;
+    }else{
+        return "<strong style='color: red;'>Tanımlı Değil</strong>";
+    }
+
 
 }
 

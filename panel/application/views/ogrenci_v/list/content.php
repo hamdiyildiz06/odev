@@ -20,9 +20,11 @@
                             <th class="w50 text-center"><i class="fa fa-reorder"></i></th>
                             <th class="w50">#id</th>
                             <th>Başlık</th>
-                            <th class="text-center">Kategori</th>
-                            <th>Durumu</th>
-                            <th class="text-center">İşlemler</th>
+                            <th class="text-center">Fakülte</th>
+                            <th class="text-center">Bölüm</th>
+                            <th class="text-center">Sınıf</th>
+                            <th class="text-center">Durumu</th>
+                            <th class="text-center w200">İşlemler</th>
                         </tr>
                     </thead>
                     <tbody class="sortable" data-url="<?= base_url("ogrenci/rankSetter"); ?>">
@@ -32,7 +34,9 @@
                         <th class="text-center"><?= $item->id; ?></th>
                         <td><?= $item->title; ?></td>
                         <td class="text-center"><?=  get_category_title($item->category_id); ?></td>
-                        <td>
+                        <td class="text-center"><?=  get_portfolyo_title($item->portfolyo_id); ?></td>
+                        <td class="text-center"><?=  get_brands_title($item->brands_id); ?></td>
+                        <td class="text-center">
                             <input
                                     data-url="<?= base_url("ogrenci/isActiveSetter/{$item->id}"); ?>"
                                     class="isActive"

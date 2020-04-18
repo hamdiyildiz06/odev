@@ -11,6 +11,7 @@ class Ogrenci extends CI_Controller{
 
         $this->viewFolder = "ogrenci_v";
         $this->load->model("ogrenci_model");
+        $this->load->model("portfolio_model");
         $this->load->model("portfolio_image_model");
         $this->load->model("portfolio_category_model");
         if (!get_active_user()){
@@ -48,6 +49,12 @@ class Ogrenci extends CI_Controller{
             )
         );
 
+        $viewData->bolumler = $this->portfolio_model->get_all(
+            array(
+                "category_id" => 1
+            )
+        );
+
         $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
     }
 
@@ -55,8 +62,10 @@ class Ogrenci extends CI_Controller{
         $this->load->library("form_validation");
 
         // kurallar yazılır
-        $this->form_validation->set_rules("title","Başlık","required|trim");
-        $this->form_validation->set_rules("category_id","Kategori","required|trim");
+        $this->form_validation->set_rules("title","İsim Soyisim","required|trim");
+        $this->form_validation->set_rules("category_id","Fakülte","required|trim");
+        $this->form_validation->set_rules("portfolyo_id","Bölüm","required|trim");
+        $this->form_validation->set_rules("brands_id","Sınıf","required|trim");
 
         //Hata mesajlarının Oluşturulması
         $this->form_validation->set_message(
@@ -65,16 +74,21 @@ class Ogrenci extends CI_Controller{
             )
         );
 
+
         // form_validation çalıştırılır
         $validate = $this->form_validation->run();
 
         if($validate){
+
+
             $insert = $this->ogrenci_model->add(
                 array(
-                    "title"        => $this->input->post("title"),
                     "url"          => convertToSEO($this->input->post("title")),
+                    "title"        => $this->input->post("title"),
                     "category_id"  => $this->input->post("category_id"),
-                    "rank"         => 0,
+                    "portfolyo_id"  => $this->input->post("portfolyo_id"),
+                    "brands_id"  => $this->input->post("brands_id"),
+                    "rank"          => 0,
                     "isActive"     => 1,
                     "createdAt"    => date("Y-m-d H:i:s ")
                 )
@@ -100,15 +114,28 @@ class Ogrenci extends CI_Controller{
             }
 
             $this->session->set_flashdata("alert", $alert);
-            redirect(base_url("portfolio"));
+            redirect(base_url("ogrenci"));
 
         }else{
+
             $viewData = new stdClass();
 
             /** View'e Gönderilecek değişkenlerin set edilmesi ..*/
             $viewData->viewFolder    = $this->viewFolder;
             $viewData->subViewFolder = "add";
             $viewData->form_error = true;
+
+            $viewData->categories = $this->portfolio_category_model->get_all(
+                array(
+                    "isActive" => 1
+                )
+            );
+
+            $viewData->bolumler = $this->portfolio_model->get_all(
+                array(
+                    "category_id" => 1
+                )
+            );
 
             $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
         }
@@ -453,6 +480,21 @@ class Ogrenci extends CI_Controller{
 
         $render_html = $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/render_elements/image_list_v", $viewData, true);
         echo $render_html;
+    }
+
+    public function categoriSec($id){
+        if ($id){
+
+            $bolumler = $this->portfolio_model->get_all(
+                array(
+                    "category_id" => $id
+                )
+            );
+
+            foreach ($bolumler as $bolum ){
+                echo "<option value='$bolum->id'>".$bolum->title."</option>";
+            }
+        }
     }
 
 }
