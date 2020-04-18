@@ -23,7 +23,7 @@
                     <div class="row">
                         <div class="form-group col-md-12">
                             <label for="category_id">Fakülte</label>
-                            <select  name="category_id" class="form-control categoriSec" data-url="<?php echo base_url("ogrenci/categoriSec/"); ?>"  id="category_id">
+                            <select  name="category_id" id="category_id" class="form-control categoriSec" data-url="<?php echo base_url("ogrenci/categoriSec/"); ?>">
 
                                 <?php foreach ($categories as $category):  ?>
                                     <option class="catSec"  value="<?= $category->id; ?>"><?= $category->title; ?></option>
@@ -38,7 +38,7 @@
 
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="portfolyo_id">Bölüm</label>brands_id
+                            <label for="portfolyo_id">Bölüm</label>
                             <select  name="portfolyo_id" class="form-control bolumSec" data-url="<?php echo base_url("ogrenci/categoriSec/"); ?>"  id="portfolyo_id">
                                 <?php foreach ($bolumler as $portfolyo):  ?>
                                     <option class="catSec"  value="<?= $portfolyo->id; ?>"><?= $portfolyo->title; ?></option>
@@ -53,7 +53,13 @@
                     <div class="row">
                         <div class="form-group col-md-12">
                             <label for="brands_id">Sınıf</label>
-                            <input type="text" class="form-control" id="brands_id" placeholder="İşi Anlatan Başlık Bilgisi" name="brands_id" value="<?= isset($form_error) ? set_value("brands_id") : null; ?>">
+                            <select  name="brands_id" id="brands_id" class="form-control" data-url="<?php echo base_url("ogrenci/categoriSec/"); ?>">
+
+                                <?php foreach ($brands as $brand):  ?>
+                                    <option value="<?= $brand->id; ?>"><?= $brand->title; ?></option>
+                                <?php endforeach; ?>
+
+                            </select>
                             <?php if (isset($form_error)){ ?>
                                 <small class="input-form-error pull-right"><?= form_error("brands_id"); ?></small>
                             <?php } ?>

@@ -39,6 +39,7 @@ class Ogrenci extends CI_Controller{
 
     public function new_form(){
         $viewData = new stdClass();
+        $this->load->model("brand_model");
 
         /** View'e Gönderilecek değişkenlerin set edilmesi ..*/
         $viewData->viewFolder    = $this->viewFolder;
@@ -52,6 +53,12 @@ class Ogrenci extends CI_Controller{
         $viewData->bolumler = $this->portfolio_model->get_all(
             array(
                 "category_id" => 1
+            )
+        );
+
+        $viewData->brands = $this->brand_model->get_all(
+            array(
+                "isActive" => 1
             )
         );
 
@@ -137,12 +144,20 @@ class Ogrenci extends CI_Controller{
                 )
             );
 
+            $this->load->model("brand_model");
+            $viewData->brands = $this->brand_model->get_all(
+                array(
+                    "isActive" => 1
+                )
+            );
+
             $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
         }
     }
 
     public function update_form($id){
         $viewData = new stdClass();
+        $this->load->model("brand_model");
 
         /** Tablodan verilerin getirilmesi ..*/
         $item  =  $this->ogrenci_model->get(
@@ -157,6 +172,20 @@ class Ogrenci extends CI_Controller{
             )
         );
 
+        $viewData->bolumler = $this->portfolio_model->get_all(
+            array(
+                "category_id" => $item->category_id
+            )
+        );
+
+        $viewData->brands = $this->brand_model->get_all(
+            array(
+                "isActive" => 1
+            )
+        );
+
+
+
         /** View'e Gönderilecek değişkenlerin set edilmesi ..*/
         $viewData->viewFolder    = $this->viewFolder;
         $viewData->subViewFolder = "update";
@@ -170,8 +199,10 @@ class Ogrenci extends CI_Controller{
         $this->load->library("form_validation");
 
         // kurallar yazılır
-        $this->form_validation->set_rules("title","Başlık","required|trim");
-        $this->form_validation->set_rules("category_id","Kategori","required|trim");
+        $this->form_validation->set_rules("title","İsim Soyisim","required|trim");
+        $this->form_validation->set_rules("category_id","Fakülte","required|trim");
+        $this->form_validation->set_rules("portfolyo_id","Bölüm","required|trim");
+        $this->form_validation->set_rules("brands_id","Sınıf","required|trim");
 
         //Hata mesajlarının Oluşturulması
         $this->form_validation->set_message(
@@ -189,9 +220,11 @@ class Ogrenci extends CI_Controller{
                     "id"          => $id
                 ),
                 array(
-                    "title"        => $this->input->post("title"),
                     "url"          => convertToSEO($this->input->post("title")),
+                    "title"        => $this->input->post("title"),
                     "category_id"  => $this->input->post("category_id"),
+                    "portfolyo_id"  => $this->input->post("portfolyo_id"),
+                    "brands_id"  => $this->input->post("brands_id")
                 )
             );
 
@@ -213,14 +246,27 @@ class Ogrenci extends CI_Controller{
             }
 
             $this->session->set_flashdata("alert", $alert);
-            redirect(base_url("portfolio"));
+            redirect(base_url("ogrenci"));
         }else{
             $viewData = new stdClass();
 
             /** Tablodan verilerin getirilmesi ..*/
-            $item  =  $this->ogrenci_model->get(
+            $viewData->item  =  $this->ogrenci_model->get(
                 array(
                     "id" => $id
+                )
+            );
+
+            $viewData->bolumler = $this->portfolio_model->get_all(
+                array(
+                    "category_id" => 1
+                )
+            );
+
+            $this->load->model("brand_model");
+            $viewData->brands = $this->brand_model->get_all(
+                array(
+                    "isActive" => 1
                 )
             );
 
@@ -228,7 +274,7 @@ class Ogrenci extends CI_Controller{
             $viewData->viewFolder    = $this->viewFolder;
             $viewData->subViewFolder = "update";
             $viewData->form_error = true;
-            $viewData->item = $item;
+
             $viewData->categories = $this->portfolio_category_model->get_all(
                 array(
                     "isActive" => 1
