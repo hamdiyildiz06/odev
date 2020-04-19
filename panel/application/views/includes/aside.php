@@ -47,6 +47,7 @@
                     </a>
                 </li>
 
+                <?php if ($user->rutbe == 1){ ?>
                 <li class="has-submenu">
                     <a href="javascript:void(0)" class="submenu-toggle">
                         <i class="menu-icon fa fa-asterisk"></i>
@@ -58,35 +59,43 @@
                         <li><a href="<?= base_url("portfolio"); ?>"><span class="menu-text">Bölüm ekle</span></a></li>
                     </ul>
                 </li>
+                <?php } ?>
 
+                <?php if ($user->rutbe == 1){ ?>
                 <li>
                     <a href="<?= base_url("brands"); ?>">
                         <i class="menu-icon zmdi zmdi-puzzle-piece zmdi-hc-lg"></i>
                         <span class="menu-text">Sınıf işlemleri</span>
                     </a>
                 </li>
+                <?php } ?>
 
+                <?php if ($user->rutbe == 1){ ?>
                 <li>
                     <a href="<?= base_url("ogrenci"); ?>">
                         <i class="menu-icon fa fa-user-secret"></i>
                         <span class="menu-text">Ögrenci Kayıt</span>
                     </a>
                 </li>
+                <?php } ?>
 
+                <?php if ($user->rutbe == 1){ ?>
                 <li>
                     <a href="<?= base_url("users"); ?>">
                         <i class="menu-icon fa fa-user-secret"></i>
                         <span class="menu-text">Kullanıcılar</span>
                     </a>
                 </li>
+                <?php } ?>
 
+                <?php if ($user->rutbe == 1){ ?>
                 <li>
                     <a href="<?= base_url("courses"); ?>">
                         <i class="menu-icon fa fa-calendar"></i>
                         <span class="menu-text">Sınav İşlemleri</span>
                     </a>
                 </li>
-
+                <?php } ?>
             </ul><!-- .app-menu -->
         </div><!-- .menubar-scroll-inner -->
     </div><!-- .menubar-scroll -->

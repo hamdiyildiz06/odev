@@ -1,3 +1,4 @@
+<?php $user = get_active_user(); ?>
 <div class="row">
     <!-- new row -->
     <div class="col-md-3 col-sm-6">
@@ -11,7 +12,7 @@
                     <h3 class="pull-left text-primary m-0 fw-500"><span class="counter" data-plugin="counterUp"><?= $ogren ?></span> Öğrencimiz</h3>
                     <div class="pull-right watermark"><i class="fa fa-2x fa-user"></i></div>
                 </div>
-                <p class="m-b-0 text-muted">Consectetur adipisicing elit. Consequatur eaque corporis laudantium.</p>
+                <p class="m-b-0 text-muted text-center">Üniversitemize Bünyesinde Bulunan Toplam <br> Ögrenci Sayımız</p>
             </div><!-- .widget-body -->
         </div><!-- .widget -->
     </div><!-- END column -->
@@ -27,7 +28,7 @@
                     <h3 class="pull-left text-success m-0 fw-500"><span class="counter" data-plugin="counterUp"><?= $fakulte ?></span> Fakültemiz</h3>
                     <div class="pull-right watermark"><i class="fa fa-2x fa-university "></i></div>
                 </div>
-                <p class="m-b-0 text-muted">Consectetur adipisicing elit. Consequatur eaque corporis laudantium.</p>
+                <p class="m-b-0 text-muted text-center">Üniversitemize Bünyesinde Bulunan Toplam <br> Fakülte Sayımız</p>
             </div><!-- .widget-body -->
         </div><!-- .widget -->
     </div><!-- END column -->
@@ -43,7 +44,7 @@
                     <h3 class="pull-left text-warning m-0 fw-500"><span class="counter" data-plugin="counterUp"><?= $bolum ?></span> Bölümümüz</h3>
                     <div class="pull-right watermark"><i class="fa fa-2x fa-graduation-cap"></i></div>
                 </div>
-                <p class="m-b-0 text-muted">Consectetur adipisicing elit. Consequatur eaque corporis laudantium.</p>
+                <p class="m-b-0 text-muted text-center">Üniversitemize Bünyesinde Bulunan Toplam <br> Bölüm Sayımız</p>
             </div><!-- .widget-body -->
         </div><!-- .widget -->
     </div><!-- END column -->
@@ -59,12 +60,16 @@
                     <h3 class="pull-left text-danger m-0 fw-500"><span class="counter" data-plugin="counterUp"><?= $sinif ?></span> Sınıfımız</h3>
                     <div class="pull-right watermark"><i class="fa fa-2x fa-home"></i></div>
                 </div>
-                <p class="m-b-0 text-muted">Consectetur adipisicing elit. Consequatur eaque corporis laudantium.</p>
+                <p class="m-b-0 text-muted text-center">Üniversitemize Bünyesinde Bulunan Toplam <br> Sınıf Sayımız</p>
             </div><!-- .widget-body -->
         </div><!-- .widget -->
     </div><!-- END column -->
 
 </div>
+
+
+<?php if($user->rutbe == 1){ ?>
+
 
 <div class="col-md-12">
     <div class="widget">
@@ -130,3 +135,10 @@
         </div><!-- .widget-body -->
     </div><!-- .widget -->
 </div><!-- END column -->
+
+<?php } else { ?>
+
+bilgiler buraya gelecek
+
+
+<?php } ?>
