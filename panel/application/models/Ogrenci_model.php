@@ -32,4 +32,15 @@ class Ogrenci_model extends CI_Model{
         return $this->db->where($where)->delete($this->tableName);
     }
 
+    public function get_alll($where = array(), $order = "id ASC", $limit = array("count" => 0, "start" => 0))
+    {
+
+        $this->db->where($where)->order_by($order);
+
+        if(!empty($limit))
+            $this->db->limit($limit["count"], $limit["start"]);
+
+        return $this->db->get($this->tableName)->result();
+    }
+
 }

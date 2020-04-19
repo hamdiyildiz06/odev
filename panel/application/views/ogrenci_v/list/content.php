@@ -1,3 +1,4 @@
+
 <div class="row">
 
     <div class="col-md-12">
@@ -22,6 +23,7 @@
                             <th>Başlık</th>
                             <th class="text-center">Fakülte</th>
                             <th class="text-center">Bölüm</th>
+                            <th class="text-center">B.Türü</th>
                             <th class="text-center">Sınıf</th>
                             <th class="text-center">Durumu</th>
                             <th class="text-center w200">İşlemler</th>
@@ -29,12 +31,14 @@
                     </thead>
                     <tbody class="sortable" data-url="<?= base_url("ogrenci/rankSetter"); ?>">
                 <?php foreach ($items as $item): ?>
+                    <?php $portfolyo = get_portfolyo($item->portfolyo_id);  ?>
                     <tr id="ord-<?= $item->id; ?>">
                         <th class="text-center"><i class="fa fa-reorder"></i></th>
                         <th class="text-center"><?= $item->id; ?></th>
                         <td><?= $item->title; ?></td>
                         <td class="text-center"><?=  get_category_title($item->category_id); ?></td>
-                        <td class="text-center"><?=  get_portfolyo_title($item->portfolyo_id); ?></td>
+                        <td class="text-center"><?= $portfolyo->title;  ?></td>
+                        <td class="text-center"><?=  ($portfolyo->bolum_turu == 1) ? "N.Ö" : "İ:Ö"; ?></td>
                         <td class="text-center"><?=  get_brands_title($item->brands_id); ?></td>
                         <td class="text-center">
                             <input

@@ -179,7 +179,7 @@ function get_category_title($category_id = 0){
 
 }
 
-function get_portfolyo_title($portfolyo_id = 0){
+function get_portfolyo($portfolyo_id = 0){
 
     $t = get_instance();
 
@@ -192,7 +192,7 @@ function get_portfolyo_title($portfolyo_id = 0){
     );
 
     if($portfolyo){
-        return $portfolyo->title;
+        return $portfolyo;
     }else{
         return "<strong style='color: red;'>Tanımlı Değil</strong>";
     }

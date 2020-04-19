@@ -72,7 +72,7 @@ class Ogrenci extends CI_Controller{
         $this->form_validation->set_rules("title","İsim Soyisim","required|trim");
         $this->form_validation->set_rules("category_id","Fakülte","required|trim");
         $this->form_validation->set_rules("portfolyo_id","Bölüm","required|trim");
-        $this->form_validation->set_rules("brands_id","Sınıf","required|trim");
+//        $this->form_validation->set_rules("brands_id","Sınıf","required|trim");
 
         //Hata mesajlarının Oluşturulması
         $this->form_validation->set_message(
@@ -202,7 +202,7 @@ class Ogrenci extends CI_Controller{
         $this->form_validation->set_rules("title","İsim Soyisim","required|trim");
         $this->form_validation->set_rules("category_id","Fakülte","required|trim");
         $this->form_validation->set_rules("portfolyo_id","Bölüm","required|trim");
-        $this->form_validation->set_rules("brands_id","Sınıf","required|trim");
+//        $this->form_validation->set_rules("brands_id","Sınıf","required|trim");
 
         //Hata mesajlarının Oluşturulması
         $this->form_validation->set_message(
