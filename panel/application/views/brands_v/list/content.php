@@ -27,7 +27,7 @@
                     </thead>
                     <tbody class="sortable" data-url="<?= base_url("brands/rankSetter"); ?>">
                 <?php foreach ($items as $item): ?>
-                    <tr id="ord-<?= $item->id; ?>">
+                    <tr id="ord">
                         <th class="text-center"><i class="fa fa-reorder"></i></th>
                         <th class="text-center"><?= $item->id; ?></th>
                         <td><?= $item->title; ?></td>

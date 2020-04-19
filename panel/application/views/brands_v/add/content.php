@@ -26,6 +26,23 @@
                         <?php } ?>
                     </div>
 
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label for="category_id">Fakülte</label>
+                            <select name="category_id" class="form-control">
+
+                                <?php foreach ($categories as $category): ?>
+                                    <?php $category_id = empty($form_error) ? $item->category_id : set_value("category_id") ; ?>
+                                    <option <?= ($category->id === $category_id) ? "selected" : null; ?> value="<?= $category->id ?>"><?= $category->title; ?></option>
+                                <?php endforeach; ?>
+
+                            </select>
+                            <?php if (isset($form_error)){ ?>
+                                <small class="input-form-error pull-right"><?= form_error("category_id"); ?></small>
+                            <?php } ?>
+                        </div>
+                    </div>
+
 
                     <button type="submit" class="btn btn-primary btn-md btn-outline">Kaydet</button>
                     <a href="<?= base_url("brands"); ?>" class="btn btn-md btn-danger btn-outline">İptal</a>

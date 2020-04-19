@@ -80,6 +80,13 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="<?= base_url("courses"); ?>">
+                        <i class="menu-icon fa fa-calendar"></i>
+                        <span class="menu-text">Sınav İşlemleri</span>
+                    </a>
+                </li>
+
             </ul><!-- .app-menu -->
         </div><!-- .menubar-scroll-inner -->
     </div><!-- .menubar-scroll -->

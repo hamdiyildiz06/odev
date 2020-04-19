@@ -12,7 +12,7 @@
 
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Başlık</label>
+                            <label for="exampleInputEmail1">Bölüm Adı</label>
                             <input type="text" class="form-control" id="exampleInputEmail1" placeholder="İşi Anlatan Başlık Bilgisi" name="title" value="<?= isset($form_error) ? set_value("title") : $item->title; ?>">
                             <?php if (isset($form_error)){ ?>
                                 <small class="input-form-error pull-right"><?= form_error("title"); ?></small>
@@ -22,7 +22,7 @@
 
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="category_id">Kategori</label>
+                            <label for="category_id">Fakülte</label>
                             <select name="category_id" class="form-control">
 
                                 <?php foreach ($categories as $category): ?>

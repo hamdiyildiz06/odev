@@ -41,6 +41,14 @@ class Brands extends CI_Controller{
         /** View'e Gönderilecek değişkenlerin set edilmesi ..*/
         $viewData->viewFolder    = $this->viewFolder;
         $viewData->subViewFolder = "add";
+        $this->load->model("portfolio_category_model");
+
+        $viewData->categories = $this->portfolio_category_model->get_all(
+            array(
+                "isActive" => 1
+            )
+        );
+
 
         $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
     }
@@ -51,6 +59,7 @@ class Brands extends CI_Controller{
         // kurallar yazılır
         $this->form_validation->set_rules("title","Sınıf Adı","required|trim");
         $this->form_validation->set_rules("mevcut","Sınıf Mevcudu","required|trim");
+        $this->form_validation->set_rules("category_id","Sınıf Mevcudu","required|trim");
 
         //Hata mesajlarının Oluşturulması
         $this->form_validation->set_message(
@@ -67,11 +76,12 @@ class Brands extends CI_Controller{
 
                 $insert = $this->brand_model->add(
                     array(
-                        "title"       => $this->input->post("title"),
+                        "title"        => $this->input->post("title"),
                         "mevcut"       => $this->input->post("mevcut"),
-                        "rank"        => 0,
-                        "isActive"    => 1,
-                        "createdAt"   => date("Y-m-d H:i:s ")
+                        "category_id"  => $this->input->post("category_id"),
+                        "rank"         => 0,
+                        "isActive"     => 1,
+                        "createdAt"    => date("Y-m-d H:i:s ")
                     )
                 );
 
@@ -120,6 +130,14 @@ class Brands extends CI_Controller{
             )
         );
 
+        $this->load->model("portfolio_category_model");
+
+        $viewData->categories = $this->portfolio_category_model->get_all(
+            array(
+                "isActive" => 1
+            )
+        );
+
         /** View'e Gönderilecek değişkenlerin set edilmesi ..*/
         $viewData->viewFolder    = $this->viewFolder;
         $viewData->subViewFolder = "update";
@@ -134,6 +152,7 @@ class Brands extends CI_Controller{
         // kurallar yazılır
         $this->form_validation->set_rules("title","Sınıf Adı","required|trim");
         $this->form_validation->set_rules("mevcut","Sınıf Mevcudu","required|trim");
+        $this->form_validation->set_rules("category_id","Sınıf Mevcudu","required|trim");
 
         //Hata mesajlarının Oluşturulması
         $this->form_validation->set_message(
@@ -147,32 +166,27 @@ class Brands extends CI_Controller{
 
         if($validate){
 
-
             $data =  array(
                 "title"       => $this->input->post("title"),
                 "mevcut"       => $this->input->post("mevcut"),
+                "category_id"  => $this->input->post("category_id")
             );
-
 
             $update = $this->brand_model->update(array("id" => $id), $data);
 
             //TODO alert sistemi eklenecek
             if($update){
-
                 $alert = [
                     "title"    => "İşlem Başarılı",
                     "message"  => "İşleminiz Başarılı Bir Şekilde Yapıldı",
                     "type"     => "success"
                 ];
-
             }else{
-
                 $alert = [
                     "title"    => "Bir Hata Oluştu!!!",
                     "message"  => "İşleminiz Tamamlanamadı Lütfen Tekrar Deneyiniz",
                     "type"     => "error"
                 ];
-
             }
 
             $this->session->set_flashdata("alert", $alert);

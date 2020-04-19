@@ -83,7 +83,11 @@ function convertToSEO($str, $options = array())
 }
 
 function get_readable_date($date){
-    return strftime('%e %B %Y', strtotime($date));
+    return strftime('%d %m %Y', strtotime($date));
+}
+
+function get_readable_clock($date){
+    return strftime('%H : %M', strtotime($date));
 }
 
 function get_active_user(){

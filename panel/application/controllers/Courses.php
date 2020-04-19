@@ -48,21 +48,11 @@ class Courses extends CI_Controller{
     public function save(){
         $this->load->library("form_validation");
 
-        if ($_FILES["img_url"]["name"] == ""){
-            $alert = [
-                "title"    => "Bir Hata Oluştu!!!",
-                "message"  => "İşleminiz Tamamlanamadı Lütfen Bir Görsel Seçiniz ve Tekrar Deneyiniz",
-                "type"     => "error"
-            ];
-
-            $this->session->set_flashdata("alert", $alert);
-            redirect(base_url("courses/new_form"));
-            die();
-        }
-
         // kurallar yazılır
-        $this->form_validation->set_rules("title","Başlık","required|trim");
-        $this->form_validation->set_rules("event_date","Eğitim Tarihi","required|trim");
+        $this->form_validation->set_rules("egitimYili","Eğitim Yılı","required|trim");
+        $this->form_validation->set_rules("yariYil","Yarı Yıl","required|trim");
+        $this->form_validation->set_rules("oturum","Oturum","required|trim");
+        $this->form_validation->set_rules("event_date","Sınav Tarihi","required|trim");
 
         //Hata mesajlarının Oluşturulması
         $this->form_validation->set_message(
@@ -77,62 +67,40 @@ class Courses extends CI_Controller{
 
         if($validate){
 
-            $file_name = convertToSEO(pathinfo($_FILES['img_url']['name'], PATHINFO_FILENAME)) . "." . pathinfo($_FILES['img_url']['name'], PATHINFO_EXTENSION);
+        $insert = $this->course_model->add(
+            array(
+                "url"         => convertToSEO($this->input->post("egitimYili")),
+                "egitimYili"       => $this->input->post("egitimYili"),
+                "yariYil" => $this->input->post("yariYil"),
+                "oturum" => $this->input->post("oturum"),
+                "event_date"  => $this->input->post("event_date"),
+                "rank"        => 0,
+                "isActive"    => 1,
+                "createdAt"   => date("Y-m-d H:i:s ")
+            )
+        );
 
-            $image_255x157 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/{$this->viewFolder}", 255,157, $file_name);
-            $image_1140x705 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/{$this->viewFolder}", 1140,705, $file_name);
+        //TODO alert sistemi eklenecek
+        if($insert){
 
-            if($image_255x157 && $image_1140x705){
+            $alert = [
+                "title"    => "İşlem Başarılı",
+                "message"  => "İşleminiz Başarılı Bir Şekilde Yapıldı",
+                "type"     => "success"
+            ];
 
-                $insert = $this->course_model->add(
-                    array(
-                        "title"       => $this->input->post("title"),
-                        "description" => $this->input->post("description"),
-                        "url"         => convertToSEO($this->input->post("title")),
-                        "img_url"     => $file_name,
-                        "event_date"  => $this->input->post("event_date"),
-                        "rank"        => 0,
-                        "isActive"    => 1,
-                        "createdAt"   => date("Y-m-d H:i:s ")
-                    )
-                );
+        }else{
 
-                //TODO alert sistemi eklenecek
-                if($insert){
+            $alert = [
+                "title"    => "Bir Hata Oluştu!!!",
+                "message"  => "İşleminiz Tamamlanamadı Lütfen Tekrar Deneyiniz",
+                "type"     => "error"
+            ];
 
-                    $alert = [
-                        "title"    => "İşlem Başarılı",
-                        "message"  => "İşleminiz Başarılı Bir Şekilde Yapıldı",
-                        "type"     => "success"
-                    ];
+        }
 
-                }else{
-
-                    $alert = [
-                        "title"    => "Bir Hata Oluştu!!!",
-                        "message"  => "İşleminiz Tamamlanamadı Lütfen Tekrar Deneyiniz",
-                        "type"     => "error"
-                    ];
-
-                }
-
-
-            }else{
-
-                $alert = [
-                    "title"    => "Bir Hata Oluştu!!!",
-                    "message"  => "İşleminiz Tamamlanamadı Lütfen Tekrar Deneyiniz",
-                    "type"     => "error"
-                ];
-
-                $this->session->set_flashdata("alert", $alert);
-                redirect(base_url("courses/new_form"));
-                die();
-
-            }
-
-            $this->session->set_flashdata("alert", $alert);
-            redirect(base_url("courses"));
+        $this->session->set_flashdata("alert", $alert);
+        redirect(base_url("courses"));
 
         }else{
             $viewData = new stdClass();
@@ -168,8 +136,10 @@ class Courses extends CI_Controller{
         $this->load->library("form_validation");
 
         // kurallar yazılır
-        $this->form_validation->set_rules("title","Başlık","required|trim");
-        $this->form_validation->set_rules("event_date","Eğitim Tarihi","required|trim");
+        $this->form_validation->set_rules("egitimYili","Eğitim Yılı","required|trim");
+        $this->form_validation->set_rules("yariYil","Yarı Yıl","required|trim");
+        $this->form_validation->set_rules("oturum","Oturum","required|trim");
+        $this->form_validation->set_rules("event_date","Sınav Tarihi","required|trim");
 
         //Hata mesajlarının Oluşturulması
         $this->form_validation->set_message(
@@ -183,45 +153,14 @@ class Courses extends CI_Controller{
 
         if($validate){
 
-            if ($_FILES["img_url"]["name"] !== ""){
+            $data =  array(
+                "url"         => convertToSEO($this->input->post("egitimYili")),
+                "egitimYili"       => $this->input->post("egitimYili"),
+                "yariYil" => $this->input->post("yariYil"),
+                "oturum" => $this->input->post("oturum"),
+                "event_date"  => $this->input->post("event_date")
+            );
 
-                $file_name = convertToSEO(pathinfo($_FILES['img_url']['name'], PATHINFO_FILENAME)) . "." . pathinfo($_FILES['img_url']['name'], PATHINFO_EXTENSION);
-                $image_255x157 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/{$this->viewFolder}", 255,157, $file_name);
-                $image_1140x705 = upload_picture($_FILES["img_url"]["tmp_name"], "uploads/{$this->viewFolder}", 1140,705, $file_name);
-
-                if($image_255x157 && $image_1140x705){
-                    delete_picture("course_model", $id, "255x157");
-                    delete_picture("course_model", $id, "1140x705");
-
-                    $data =  array(
-                        "title"       => $this->input->post("title"),
-                        "description" => $this->input->post("description"),
-                        "event_date"  => $this->input->post("event_date"),
-                        "url"         => convertToSEO($this->input->post("title")),
-                        "img_url"   => $file_name,
-                    );
-
-                }else{
-                    $alert = [
-                        "title"    => "Bir Hata Oluştu!!!",
-                        "message"  => "İşleminiz Tamamlanamadı Lütfen Tekrar Deneyiniz",
-                        "type"     => "error"
-                    ];
-
-                    $this->session->set_flashdata("alert", $alert);
-                    redirect(base_url("courses/update_form/{$id}"));
-                    die();
-
-                }
-
-            }else{
-                $data =  array(
-                    "title"       => $this->input->post("title"),
-                    "description" => $this->input->post("description"),
-                    "event_date"  => $this->input->post("event_date"),
-                    "url"         => convertToSEO($this->input->post("title")),
-                );
-            }
 
             $update = $this->course_model->update(array("id" => $id), $data);
 

@@ -10,29 +10,40 @@
             <div class="widget-body">
                 <form action="<?= base_url("courses/save"); ?>" method="post" enctype="multipart/form-data">
 
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Başlık</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Başlık" name="title">
-                        <?php if (isset($form_error)){ ?>
-                            <small class="input-form-error pull-right"><?= form_error("title"); ?></small>
-                        <?php } ?>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Açıklama</label>
-                        <textarea  class="m-0" data-plugin="summernote" data-options="{height: 250}" name="description"></textarea>
-                    </div>
+
 
                     <div class="row">
                         <div class="col-md-4">
-                            <label for="datetimepicker1">Eğitim Tarihi</label>
+                            <label for="datetimepicker1">Sınav Tarihi</label>
                             <input type="hidden" name="event_date" id="datetimepicker1" data-plugin="datetimepicker" data-options="{ inline: true, viewMode: 'days', format : 'YYYY-MM-DD HH:mm:ss' }">
                         </div><!-- END column -->
 
-                        <div class="col-md-8 form-group image_upload_container">
-                            <label for="exampleInputFile">Görsel Seçiniz</label>
-                            <input type="file" name="img_url" id="exampleInputFile" class="form-control">
-                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="egitimYili">Eğitim Yılı</label>
+                                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="2019 - 2020 (Şeklinde Giriniz)" name="egitimYili">
+                                <?php if (isset($form_error)){ ?>
+                                    <small class="input-form-error pull-right"><?= form_error("egitimYili"); ?></small>
+                                <?php } ?>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="yariYil">Yarı Yıl</label>
+                                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Güz veya Yaz yarıyılı Şeklinde Giriniz" name="yariYil">
+                                <?php if (isset($form_error)){ ?>
+                                    <small class="input-form-error pull-right"><?= form_error("yariYil"); ?></small>
+                                <?php } ?>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="oturum">Oturum</label>
+                                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="1. Oturum Şeklinde Giriniz" name="oturum">
+                                <?php if (isset($form_error)){ ?>
+                                    <small class="input-form-error pull-right"><?= form_error("oturum"); ?></small>
+                                <?php } ?>
+                            </div>
+                        </div><!-- END column -->
                     </div>
 
 

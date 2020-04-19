@@ -19,23 +19,25 @@
                         <tr>
                             <th class="w50 text-center"><i class="fa fa-reorder"></i></th>
                             <th class="w50">#id</th>
-                            <th>Başlık</th>
+                            <th>Eğitim Yılı</th>
+                            <th class="text-center">Yarı Yıl</th>
+                            <th class="text-center">Oturum</th>
                             <th class="text-center">Tarih</th>
-                            <th class="text-center">Görsel</th>
+                            <th class="text-center">Saat</th>
                             <th class="text-center">Durumu</th>
                             <th class="text-center">İşlemler</th>
                         </tr>
                     </thead>
                     <tbody class="sortable" data-url="<?= base_url("courses/rankSetter"); ?>">
                 <?php foreach ($items as $item): ?>
-                    <tr id="ord-<?= $item->id; ?>">
+                    <tr id="ord">
                         <th class="text-center"><i class="fa fa-reorder"></i></th>
                         <th class="text-center"><?= $item->id; ?></th>
-                        <td><?= $item->title; ?></td>
+                        <td><?= $item->egitimYili; ?></td>
+                        <td><?= $item->yariYil; ?></td>
+                        <td><?= $item->oturum; ?></td>
                         <td class="w150 text-center"><?= get_readable_date($item->event_date); ?></td>
-                        <td class="text-center w150">
-                            <img width="75" src="<?= get_picture($viewFolder, $item->img_url, "255x157"); ?>" alt="" class="img-rounded">
-                        </td>
+                        <td class="w150 text-center"><?= get_readable_clock($item->event_date); ?></td>
                         <td class="text-center w100">
                             <input
                                     data-url="<?= base_url("courses/isActiveSetter/{$item->id}"); ?>"

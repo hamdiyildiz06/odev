@@ -70,7 +70,7 @@
     <div class="widget">
         <header class="widget-header">
             <h4 class="widget-title">Sınava Girecek Öğrenci Listemiz</h4>
-            <a href="<?= base_url("dashboard/sinavKaristir"); ?>" class="btn pull-right btn-outline btn-primary btn-xs"><i class="fa fa-plus"></i> Sınav İşlemleri</a>
+            <a href="<?= base_url("dashboard/sinavKaristir"); ?>" class="btn pull-right btn-outline btn-primary btn-xs"><i class="fa fa-plus"></i> Sınav İçin Sınıf Belirle</a>
         </header><!-- .widget-header -->
         <hr class="widget-separator">
         <div class="widget-body">
@@ -80,7 +80,7 @@
                     <tr>
                         <th class="w50 text-center"><i class="fa fa-reorder"></i></th>
                         <th class="w50">#id</th>
-                        <th>Başlık</th>
+                        <th>İsim Soyisim</th>
                         <th class="text-center">Fakülte</th>
                         <th class="text-center">Bölüm</th>
                         <th class="text-center">B.Türü</th>
@@ -91,12 +91,15 @@
                     </thead>
                     <tfoot>
                     <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
+                        <th class="w50 text-center"><i class="fa fa-reorder"></i></th>
+                        <th class="w50">#id</th>
+                        <th>İsim Soyisim</th>
+                        <th class="text-center">Fakülte</th>
+                        <th class="text-center">Bölüm</th>
+                        <th class="text-center">B.Türü</th>
+                        <th class="text-center">Sınıf</th>
+                        <th class="text-center">S.Sınıf</th>
+                        <th class="text-center w200">İşlemler</th>
                     </tr>
                     </tfoot>
                     <tbody>

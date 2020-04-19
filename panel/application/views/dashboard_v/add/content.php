@@ -90,12 +90,14 @@
                     </thead>
                     <tfoot>
                     <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
+                        <th class="w50 text-center"><i class="fa fa-reorder"></i></th>
+                        <th class="w50">#id</th>
+                        <th>Başlık</th>
+                        <th class="text-center">Fakülte</th>
+                        <th class="text-center">Bölüm</th>
+                        <th class="text-center">B.Türü</th>
+                        <th class="text-center">Sınıf</th>
+                        <th class="text-center w200">İşlemler</th>
                     </tr>
                     </tfoot>
                     <tbody>

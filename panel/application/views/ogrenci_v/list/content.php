@@ -32,7 +32,7 @@
                     <tbody class="sortable" data-url="<?= base_url("ogrenci/rankSetter"); ?>">
                 <?php foreach ($items as $item): ?>
                     <?php $portfolyo = get_portfolyo($item->portfolyo_id);  ?>
-                    <tr id="ord-<?= $item->id; ?>">
+                    <tr id="ord">
                         <th class="text-center"><i class="fa fa-reorder"></i></th>
                         <th class="text-center"><?= $item->id; ?></th>
                         <td><?= $item->title; ?></td>
