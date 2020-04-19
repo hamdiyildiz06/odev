@@ -72,6 +72,7 @@ class Ogrenci extends CI_Controller{
         $this->form_validation->set_rules("title","İsim Soyisim","required|trim");
         $this->form_validation->set_rules("category_id","Fakülte","required|trim");
         $this->form_validation->set_rules("portfolyo_id","Bölüm","required|trim");
+        $this->form_validation->set_rules("tc","tc","required|trim");
 //        $this->form_validation->set_rules("brands_id","Sınıf","required|trim");
 
         //Hata mesajlarının Oluşturulması
@@ -95,6 +96,7 @@ class Ogrenci extends CI_Controller{
                     "category_id"  => $this->input->post("category_id"),
                     "portfolyo_id"  => $this->input->post("portfolyo_id"),
                     "brands_id"  => $this->input->post("brands_id"),
+                    "tc"  => $this->input->post("tc"),
                     "rank"          => 0,
                     "isActive"     => 1,
                     "createdAt"    => date("Y-m-d H:i:s ")
@@ -202,6 +204,7 @@ class Ogrenci extends CI_Controller{
         $this->form_validation->set_rules("title","İsim Soyisim","required|trim");
         $this->form_validation->set_rules("category_id","Fakülte","required|trim");
         $this->form_validation->set_rules("portfolyo_id","Bölüm","required|trim");
+        $this->form_validation->set_rules("tc","tc","required|trim");
 //        $this->form_validation->set_rules("brands_id","Sınıf","required|trim");
 
         //Hata mesajlarının Oluşturulması
@@ -224,7 +227,8 @@ class Ogrenci extends CI_Controller{
                     "title"        => $this->input->post("title"),
                     "category_id"  => $this->input->post("category_id"),
                     "portfolyo_id"  => $this->input->post("portfolyo_id"),
-                    "brands_id"  => $this->input->post("brands_id")
+                    "brands_id"  => $this->input->post("brands_id"),
+                    "tc"  => $this->input->post("tc")
                 )
             );
 

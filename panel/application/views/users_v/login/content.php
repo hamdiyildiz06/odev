@@ -13,9 +13,9 @@
         <h4 class="form-title m-b-xl text-center">Bigileriniz ile CMS'e Giriş Yapınız</h4>
         <form action="<?= base_url("userop/do_login"); ?>" method="post">
             <div class="form-group">
-                <input id="sign-in-email" type="email" class="form-control" placeholder="E-Posta" name="user_email" value="<?= isset($form_error) ? set_value("user_email") : ""; ?>">
+                <input id="title" type="text" class="form-control" placeholder="Kullanıcı Adı" name="title" value="<?= isset($form_error) ? set_value("title") : ""; ?>">
                 <?php if (isset($form_error)){ ?>
-                    <small class="input-form-error pull-right"><?= form_error("user_email"); ?></small>
+                    <small class="input-form-error pull-right"><?= form_error("title"); ?></small>
                 <?php } ?>
             </div>
 

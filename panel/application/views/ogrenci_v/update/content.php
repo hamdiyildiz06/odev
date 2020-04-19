@@ -12,10 +12,20 @@
 
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Başlık</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="İşi Anlatan Başlık Bilgisi" name="title" value="<?= isset($form_error) ? set_value("title") : $item->title; ?>">
+                            <label for="title">Başlık</label>
+                            <input type="text" class="form-control" id="title" placeholder="İsim ve Soyisim" name="title" value="<?= isset($form_error) ? set_value("title") : $item->title; ?>">
                             <?php if (isset($form_error)){ ?>
                                 <small class="input-form-error pull-right"><?= form_error("title"); ?></small>
+                            <?php } ?>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label for="tc">Tc Kimlik</label>
+                            <input type="text" class="form-control" id="tc" placeholder="İşi Anlatan Başlık Bilgisi" name="tc" value="<?= isset($form_error) ? set_value("tc") : $item->tc; ?>">
+                            <?php if (isset($form_error)){ ?>
+                                <small class="input-form-error pull-right"><?= form_error("tc"); ?></small>
                             <?php } ?>
                         </div>
                     </div>
