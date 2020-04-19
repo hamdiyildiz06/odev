@@ -11,8 +11,8 @@ class Dashboard extends CI_Controller {
         parent::__construct();
         $this->viewFolder = "dashboard_v";
         $this->load->model("ogrenci_model");
+        $this->load->model("brand_model");
         $this->load->model("portfolio_model");
-        $this->load->model("portfolio_image_model");
         $this->load->model("portfolio_category_model");
         if (!get_active_user()){
             redirect(base_url("login"));
@@ -24,10 +24,16 @@ class Dashboard extends CI_Controller {
         $viewData = new stdClass();
 
 
+
         /** tablodan verilerin getirilmesi */
         $items = $this->ogrenci_model->get_all(
             array(),"rank ASC"
         );
+
+        $viewData->fakulte = count($this->portfolio_category_model->get_all());
+        $viewData->bolum = count($this->portfolio_model->get_all());
+        $viewData->sinif = count($this->brand_model->get_all());
+        $viewData->ogren = count($this->ogrenci_model->get_all());
 
         /** View'e Gönderilecek değişkenlerin set edilmesi ..*/
         $viewData->viewFolder    = $this->viewFolder;
@@ -43,6 +49,11 @@ class Dashboard extends CI_Controller {
 
         $this->load->model("brand_model");
         $this->load->model("ogrenci_model");
+
+        $viewData->fakulte = count($this->portfolio_category_model->get_all());
+        $viewData->bolum = count($this->portfolio_model->get_all());
+        $viewData->sinif = count($this->brand_model->get_all());
+        $viewData->ogren = count($this->ogrenci_model->get_all());
 
 
         $siniflar = $this->brand_model->get_all();

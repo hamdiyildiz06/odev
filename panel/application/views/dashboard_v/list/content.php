@@ -8,7 +8,7 @@
             <hr class="widget-separator">
             <div class="widget-body p-t-lg">
                 <div class="clearfix m-b-md">
-                    <h3 class="pull-left text-primary m-0 fw-500"><span class="counter" data-plugin="counterUp">160</span> Öğrencimiz</h3>
+                    <h3 class="pull-left text-primary m-0 fw-500"><span class="counter" data-plugin="counterUp"><?= $ogren ?></span> Öğrencimiz</h3>
                     <div class="pull-right watermark"><i class="fa fa-2x fa-user"></i></div>
                 </div>
                 <p class="m-b-0 text-muted">Consectetur adipisicing elit. Consequatur eaque corporis laudantium.</p>
@@ -24,7 +24,7 @@
             <hr class="widget-separator">
             <div class="widget-body p-t-lg">
                 <div class="clearfix m-b-md">
-                    <h3 class="pull-left text-success m-0 fw-500"><span class="counter" data-plugin="counterUp">960</span> Fakültemiz</h3>
+                    <h3 class="pull-left text-success m-0 fw-500"><span class="counter" data-plugin="counterUp"><?= $fakulte ?></span> Fakültemiz</h3>
                     <div class="pull-right watermark"><i class="fa fa-2x fa-university "></i></div>
                 </div>
                 <p class="m-b-0 text-muted">Consectetur adipisicing elit. Consequatur eaque corporis laudantium.</p>
@@ -40,7 +40,7 @@
             <hr class="widget-separator">
             <div class="widget-body p-t-lg">
                 <div class="clearfix m-b-md">
-                    <h3 class="pull-left text-warning m-0 fw-500"><span class="counter" data-plugin="counterUp">120</span> Bölümümüz</h3>
+                    <h3 class="pull-left text-warning m-0 fw-500"><span class="counter" data-plugin="counterUp"><?= $bolum ?></span> Bölümümüz</h3>
                     <div class="pull-right watermark"><i class="fa fa-2x fa-graduation-cap"></i></div>
                 </div>
                 <p class="m-b-0 text-muted">Consectetur adipisicing elit. Consequatur eaque corporis laudantium.</p>
@@ -56,7 +56,7 @@
             <hr class="widget-separator">
             <div class="widget-body p-t-lg">
                 <div class="clearfix m-b-md">
-                    <h3 class="pull-left text-danger m-0 fw-500"><span class="counter" data-plugin="counterUp">190</span> Sınıfımız</h3>
+                    <h3 class="pull-left text-danger m-0 fw-500"><span class="counter" data-plugin="counterUp"><?= $sinif ?></span> Sınıfımız</h3>
                     <div class="pull-right watermark"><i class="fa fa-2x fa-home"></i></div>
                 </div>
                 <p class="m-b-0 text-muted">Consectetur adipisicing elit. Consequatur eaque corporis laudantium.</p>
