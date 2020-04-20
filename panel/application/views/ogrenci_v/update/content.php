@@ -77,6 +77,16 @@
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label for="sira">Sıra Sadece Sınava Gireceği Zaman Düzenle</label>
+                            <input type="text" class="form-control" id="sira" placeholder="İşi Anlatan Başlık Bilgisi" name="sira" value="<?= isset($form_error) ? set_value("sira") : $item->sira; ?>">
+                            <?php if (isset($form_error)){ ?>
+                                <small class="input-form-error pull-right"><?= form_error("sira"); ?></small>
+                            <?php } ?>
+                        </div>
+                    </div>
+
                     <button type="submit" class="btn btn-primary btn-md btn-outline">Güncelle</button>
                     <a href="<?= base_url("ogrenci"); ?>" class="btn btn-md btn-danger btn-outline">İptal</a>
                 </form>

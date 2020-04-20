@@ -81,15 +81,6 @@
 
                 <?php if ($user->rutbe == 1){ ?>
                 <li>
-                    <a href="<?= base_url("users"); ?>">
-                        <i class="menu-icon fa fa-user-secret"></i>
-                        <span class="menu-text">Kullanıcılar</span>
-                    </a>
-                </li>
-                <?php } ?>
-
-                <?php if ($user->rutbe == 1){ ?>
-                <li>
                     <a href="<?= base_url("courses"); ?>">
                         <i class="menu-icon fa fa-calendar"></i>
                         <span class="menu-text">Sınav İşlemleri</span>

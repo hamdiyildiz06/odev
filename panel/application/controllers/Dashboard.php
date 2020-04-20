@@ -12,6 +12,7 @@ class Dashboard extends CI_Controller {
         $this->viewFolder = "dashboard_v";
         $this->load->model("ogrenci_model");
         $this->load->model("brand_model");
+        $this->load->model("course_model");
         $this->load->model("portfolio_model");
         $this->load->model("portfolio_category_model");
         if (!get_active_user()){
@@ -30,10 +31,19 @@ class Dashboard extends CI_Controller {
             array(),"rank ASC"
         );
 
+        $viewData->courses = $this->course_model->get(
+            array(
+                "isActive" => 1
+            )
+        );
+
+
+        /** Listeler için gerekli */
         $viewData->fakulte = count($this->portfolio_category_model->get_all());
         $viewData->bolum = count($this->portfolio_model->get_all());
         $viewData->sinif = count($this->brand_model->get_all());
         $viewData->ogren = count($this->ogrenci_model->get_all());
+
 
         /** View'e Gönderilecek değişkenlerin set edilmesi ..*/
         $viewData->viewFolder    = $this->viewFolder;
@@ -81,7 +91,7 @@ class Dashboard extends CI_Controller {
                     "sec" => 0
                 ), "rand()", array("start" => 0, "count" =>$sinif->mevcut)
             );
-
+            $sira = 1;
             foreach ($orrenci as $oren){
 
                 $update = $this->ogrenci_model->update(
@@ -92,9 +102,11 @@ class Dashboard extends CI_Controller {
                     ),
                     array(
                         "sbrands" => $sinif->id,
-                        "sec" => 1
+                        "sec" => 1,
+                        "sira" => $sira
                     )
                 );
+                $sira++;
             }
 
         }

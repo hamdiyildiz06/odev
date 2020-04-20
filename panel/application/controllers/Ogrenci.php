@@ -226,9 +226,10 @@ class Ogrenci extends CI_Controller{
                     "url"          => convertToSEO($this->input->post("title")),
                     "title"        => $this->input->post("title"),
                     "category_id"  => $this->input->post("category_id"),
-                    "portfolyo_id"  => $this->input->post("portfolyo_id"),
-                    "brands_id"  => $this->input->post("brands_id"),
-                    "tc"  => $this->input->post("tc")
+                    "portfolyo_id" => $this->input->post("portfolyo_id"),
+                    "brands_id"    => $this->input->post("brands_id"),
+                    "tc"           => $this->input->post("tc"),
+                    "sira"         => $this->input->post("sira")
                 )
             );
 
