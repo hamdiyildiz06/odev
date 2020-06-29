@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Brands extends CI_Controller{
+class Teachers extends CI_Controller{
 
     public $viewFolder = "";
 
@@ -9,18 +9,22 @@ class Brands extends CI_Controller{
     {
         parent::__construct();
 
-        $this->viewFolder = "brands_v";
-        $this->load->model("brand_model");
+        $this->viewFolder = "teachers_v";
+        $this->load->model("teacher_model");
+        $this->load->model("portfolio_model");
+        $this->load->model("portfolio_category_model");
         if (!get_active_user()){
             redirect(base_url("login"));
         }
     }
 
     public function index(){
+
         $viewData = new stdClass();
 
+
         /** tablodan verilerin getirilmesi */
-        $items = $this->brand_model->get_all(
+        $items = $this->teacher_model->get_all(
             array(),"rank ASC"
         );
 
@@ -34,13 +38,24 @@ class Brands extends CI_Controller{
 
     public function new_form(){
         $viewData = new stdClass();
+        $this->load->model("brand_model");
 
         /** View'e Gönderilecek değişkenlerin set edilmesi ..*/
         $viewData->viewFolder    = $this->viewFolder;
         $viewData->subViewFolder = "add";
-        $this->load->model("portfolio_category_model");
-
         $viewData->categories = $this->portfolio_category_model->get_all(
+            array(
+                "isActive" => 1
+            )
+        );
+
+        $viewData->bolumler = $this->portfolio_model->get_all(
+            array(
+                "category_id" => 1
+            )
+        );
+
+        $viewData->brands = $this->brand_model->get_all(
             array(
                 "isActive" => 1
             )
@@ -53,52 +68,58 @@ class Brands extends CI_Controller{
         $this->load->library("form_validation");
 
         // kurallar yazılır
-        $this->form_validation->set_rules("title","Sınıf Adı","required|trim");
-        $this->form_validation->set_rules("mevcut","Sınıf Mevcudu","required|trim");
-        $this->form_validation->set_rules("category_id","Sınıf Mevcudu","required|trim");
+        $this->form_validation->set_rules("title","İsim Soyisim","required|trim");
+        $this->form_validation->set_rules("tc","tc","required|trim");
+//        $this->form_validation->set_rules("brands_id","Sınıf","required|trim");
 
         //Hata mesajlarının Oluşturulması
         $this->form_validation->set_message(
             array(
-                "required" => "<strong>{field}</strong> Alanını Boş Bırakmayınız.."
+                "required" => "<strong>{field}</strong> alanı boş bırakılamaz"
             )
         );
 
+
         // form_validation çalıştırılır
         $validate = $this->form_validation->run();
+
         if($validate){
+            $insert = $this->teacher_model->add(
+                array(
+                    "url"          => convertToSEO($this->input->post("title")),
+                    "title"        => $this->input->post("title"),
+                    "brands_id"  => $this->input->post("brands_id"),
+                    "tc"  => $this->input->post("tc"),
+                    "rank"          => 0,
+                    "isActive"     => 1,
+                    "createdAt"    => date("Y-m-d H:i:s ")
+                )
+            );
 
-                $insert = $this->brand_model->add(
-                    array(
-                        "title"        => $this->input->post("title"),
-                        "mevcut"       => $this->input->post("mevcut"),
-                        "category_id"  => $this->input->post("category_id"),
-                        "rank"         => 0,
-                        "isActive"     => 1,
-                        "createdAt"    => date("Y-m-d H:i:s ")
-                    )
-                );
+            //TODO alert sistemi eklenecek
+            if($insert){
 
-                //TODO alert sistemi eklenecek
-                if($insert){
-                    $alert = [
-                        "title"    => "İşlem Başarılı",
-                        "message"  => "İşleminiz Başarılı Bir Şekilde Yapıldı",
-                        "type"     => "success"
-                    ];
-                }else{
-                    $alert = [
-                        "title"    => "Bir Hata Oluştu!!!",
-                        "message"  => "İşleminiz Tamamlanamadı Lütfen Tekrar Deneyiniz",
-                        "type"     => "error"
-                    ];
-                }
+                $alert = [
+                    "title"    => "İşlem Başarılı",
+                    "message"  => "İşleminiz Başarılı Bir Şekilde Yapıldı",
+                    "type"     => "success"
+                ];
 
+            }else{
+
+                $alert = [
+                    "title"    => "Bir Hata Oluştu!!!",
+                    "message"  => "İşleminiz Tamamlanamadı Lütfen Tekrar Deneyiniz",
+                    "type"     => "error"
+                ];
+
+            }
 
             $this->session->set_flashdata("alert", $alert);
-            redirect(base_url("brands"));
+            redirect(base_url("teachers"));
 
         }else{
+
             $viewData = new stdClass();
 
             /** View'e Gönderilecek değişkenlerin set edilmesi ..*/
@@ -106,23 +127,41 @@ class Brands extends CI_Controller{
             $viewData->subViewFolder = "add";
             $viewData->form_error = true;
 
+            $viewData->categories = $this->portfolio_category_model->get_all(
+                array(
+                    "isActive" => 1
+                )
+            );
+
+            $viewData->bolumler = $this->portfolio_model->get_all(
+                array(
+                    "category_id" => 1
+                )
+            );
+
+            $this->load->model("brand_model");
+            $viewData->brands = $this->brand_model->get_all(
+                array(
+                    "isActive" => 1
+                )
+            );
+
             $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
         }
     }
 
     public function update_form($id){
         $viewData = new stdClass();
+        $this->load->model("brand_model");
 
         /** Tablodan verilerin getirilmesi ..*/
-        $item  =  $this->brand_model->get(
+        $item  =  $this->teacher_model->get(
             array(
                 "id" => $id
             )
         );
 
-        $this->load->model("portfolio_category_model");
-
-        $viewData->categories = $this->portfolio_category_model->get_all(
+        $viewData->brands = $this->brand_model->get_all(
             array(
                 "isActive" => 1
             )
@@ -140,14 +179,14 @@ class Brands extends CI_Controller{
         $this->load->library("form_validation");
 
         // kurallar yazılır
-        $this->form_validation->set_rules("title","Sınıf Adı","required|trim");
-        $this->form_validation->set_rules("mevcut","Sınıf Mevcudu","required|trim");
-        $this->form_validation->set_rules("category_id","Sınıf Mevcudu","required|trim");
+        $this->form_validation->set_rules("title","İsim Soyisim","required|trim");
+        $this->form_validation->set_rules("tc","tc","required|trim");
+//        $this->form_validation->set_rules("brands_id","Sınıf","required|trim");
 
         //Hata mesajlarının Oluşturulması
         $this->form_validation->set_message(
             array(
-                "required" => "<strong>{field}</strong> Alanını Boş Bırakmayınız.."
+                "required" => "<strong>{field}</strong> alanı boş bırakılamaz"
             )
         );
 
@@ -155,44 +194,68 @@ class Brands extends CI_Controller{
         $validate = $this->form_validation->run();
 
         if($validate){
-
-            $data =  array(
-                "title"       => $this->input->post("title"),
-                "mevcut"       => $this->input->post("mevcut"),
-                "category_id"  => $this->input->post("category_id")
+            $update = $this->teacher_model->update(
+                array(
+                    "id"          => $id
+                ),
+                array(
+                    "url"          => convertToSEO($this->input->post("title")),
+                    "title"        => $this->input->post("title"),
+                    "brands_id"    => $this->input->post("brands_id"),
+                    "tc"           => $this->input->post("tc"),
+                )
             );
 
-            $update = $this->brand_model->update(array("id" => $id), $data);
-
-            //TODO alert sistemi eklenecek
             if($update){
+                //TODO alert sistemi eklenecek
                 $alert = [
                     "title"    => "İşlem Başarılı",
                     "message"  => "İşleminiz Başarılı Bir Şekilde Yapıldı",
                     "type"     => "success"
                 ];
             }else{
+
                 $alert = [
                     "title"    => "Bir Hata Oluştu!!!",
                     "message"  => "İşleminiz Tamamlanamadı Lütfen Tekrar Deneyiniz",
                     "type"     => "error"
                 ];
+
             }
 
             $this->session->set_flashdata("alert", $alert);
-            redirect(base_url("brands"));
-
+            redirect(base_url("teachers"));
         }else{
             $viewData = new stdClass();
+
+            /** Tablodan verilerin getirilmesi ..*/
+            $viewData->item  =  $this->teacher_model->get(
+                array(
+                    "id" => $id
+                )
+            );
+
+            $viewData->bolumler = $this->portfolio_model->get_all(
+                array(
+                    "category_id" => 1
+                )
+            );
+
+            $this->load->model("brand_model");
+            $viewData->brands = $this->brand_model->get_all(
+                array(
+                    "isActive" => 1
+                )
+            );
 
             /** View'e Gönderilecek değişkenlerin set edilmesi ..*/
             $viewData->viewFolder    = $this->viewFolder;
             $viewData->subViewFolder = "update";
             $viewData->form_error = true;
 
-            $viewData->item  =  $this->brand_model->get(
+            $viewData->categories = $this->portfolio_category_model->get_all(
                 array(
-                    "id" => $id
+                    "isActive" => 1
                 )
             );
 
@@ -201,8 +264,8 @@ class Brands extends CI_Controller{
     }
 
     public function delete($id){
-        delete_picture("brand_model", $id, "350x216");
-        $delete = $this->brand_model->delete(
+
+        $delete = $this->teacher_model->delete(
             array(
                 "id" => $id
             )
@@ -215,6 +278,7 @@ class Brands extends CI_Controller{
                 "message"  => "İşleminiz Başarılı Bir Şekilde Yapıldı",
                 "type"     => "success"
             ];
+
         }else{
 
             $alert = [
@@ -226,14 +290,14 @@ class Brands extends CI_Controller{
         }
 
         $this->session->set_flashdata("alert", $alert);
-        redirect(base_url("brands"));
+        redirect(base_url("teachers"));
     }
 
     public function isActiveSetter($id){
         if ($id){
             $isActive = ($this->input->post("data") === "true") ? 1 : 0;
 
-            $this->brand_model->update(
+            $this->teacher_model->update(
                 array(
                     "id" => $id,
                 ),
@@ -244,6 +308,19 @@ class Brands extends CI_Controller{
         }
     }
 
+    public function categoriSec($id){
+        if ($id){
 
+            $bolumler = $this->portfolio_model->get_all(
+                array(
+                    "category_id" => $id
+                )
+            );
+
+            foreach ($bolumler as $bolum ){
+                echo "<option value='$bolum->id'>".$bolum->title."</option>";
+            }
+        }
+    }
 
 }

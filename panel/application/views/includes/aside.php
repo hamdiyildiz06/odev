@@ -43,7 +43,7 @@
                 <li>
                     <a href="<?= base_url(); ?>">
                         <i class="menu-icon zmdi zmdi-view-dashboard zmdi-hc-lg"></i>
-                        <span class="menu-text">Dashboard</span>
+                        <span class="menu-text">Anasayfa</span>
                     </a>
                 </li>
 
@@ -75,6 +75,15 @@
                     <a href="<?= base_url("ogrenci"); ?>">
                         <i class="menu-icon fa fa-user-secret"></i>
                         <span class="menu-text">Ögrenci Kayıt</span>
+                    </a>
+                </li>
+                <?php } ?>
+
+                <?php if ($user->rutbe == 1){ ?>
+                <li>
+                    <a href="<?= base_url("teachers"); ?>">
+                        <i class="menu-icon fa fa-user-secret"></i>
+                        <span class="menu-text">Öğretmen Kayıt</span>
                     </a>
                 </li>
                 <?php } ?>
