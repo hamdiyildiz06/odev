@@ -11,6 +11,7 @@ class Teachers extends CI_Controller{
 
         $this->viewFolder = "teachers_v";
         $this->load->model("teacher_model");
+        $this->load->model("ogrenci_model");
 
         if (!get_active_user()){
             redirect(base_url("login"));
@@ -87,15 +88,33 @@ class Teachers extends CI_Controller{
             //TODO alert sistemi eklenecek
             if($insert){
 
+                $update = $this->ogrenci_model->update(
+                    array(
+                        "brands_id" => $this->input->post("brands_id")
+                    ),
+                    array(
+                        "vteacher" => $this->db->insert_id()
+                    )
+                );
 
 
+                if ($update){
 
+                    $alert = [
+                        "title"    => "İşlem Başarılı",
+                        "message"  => "İşleminiz Başarılı Bir Şekilde Yapıldı",
+                        "type"     => "success"
+                    ];
 
-                $alert = [
-                    "title"    => "İşlem Başarılı",
-                    "message"  => "İşleminiz Başarılı Bir Şekilde Yapıldı",
-                    "type"     => "success"
-                ];
+                }else{
+
+                    $alert = [
+                        "title"    => "Bir Hata Oluştu!!!",
+                        "message"  => "Vekil öğretmen atamasında bir problem yaşandı",
+                        "type"     => "error"
+                    ];
+
+                }
 
             }else{
 
@@ -187,12 +206,31 @@ class Teachers extends CI_Controller{
             );
 
             if($update){
-                //TODO alert sistemi eklenecek
-                $alert = [
-                    "title"    => "İşlem Başarılı",
-                    "message"  => "İşleminiz Başarılı Bir Şekilde Yapıldı",
-                    "type"     => "success"
-                ];
+
+                $update1 = $this->ogrenci_model->update(
+                    array(
+                        "brands_id" => $this->input->post("brands_id")
+                    ),
+                    array(
+                        "vteacher" => $id
+                    )
+                );
+
+                if ($update1){
+                    $alert = [
+                        "title"    => "İşlem Başarılı",
+                        "message"  => "İşleminiz Başarılı Bir Şekilde Yapıldı",
+                        "type"     => "success"
+                    ];
+                }else{
+                    $alert = [
+                        "title"    => "Bir Hata Oluştu!!!",
+                        "message"  => "Vekil öğretmen atamasında bir problem yaşandı",
+                        "type"     => "error"
+                    ];
+                }
+
+                
             }else{
 
                 $alert = [
