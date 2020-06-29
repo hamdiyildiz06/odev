@@ -11,8 +11,7 @@ class Teachers extends CI_Controller{
 
         $this->viewFolder = "teachers_v";
         $this->load->model("teacher_model");
-        $this->load->model("portfolio_model");
-        $this->load->model("portfolio_category_model");
+
         if (!get_active_user()){
             redirect(base_url("login"));
         }
@@ -43,17 +42,6 @@ class Teachers extends CI_Controller{
         /** View'e Gönderilecek değişkenlerin set edilmesi ..*/
         $viewData->viewFolder    = $this->viewFolder;
         $viewData->subViewFolder = "add";
-        $viewData->categories = $this->portfolio_category_model->get_all(
-            array(
-                "isActive" => 1
-            )
-        );
-
-        $viewData->bolumler = $this->portfolio_model->get_all(
-            array(
-                "category_id" => 1
-            )
-        );
 
         $viewData->brands = $this->brand_model->get_all(
             array(
@@ -99,6 +87,10 @@ class Teachers extends CI_Controller{
             //TODO alert sistemi eklenecek
             if($insert){
 
+
+
+
+
                 $alert = [
                     "title"    => "İşlem Başarılı",
                     "message"  => "İşleminiz Başarılı Bir Şekilde Yapıldı",
@@ -126,18 +118,6 @@ class Teachers extends CI_Controller{
             $viewData->viewFolder    = $this->viewFolder;
             $viewData->subViewFolder = "add";
             $viewData->form_error = true;
-
-            $viewData->categories = $this->portfolio_category_model->get_all(
-                array(
-                    "isActive" => 1
-                )
-            );
-
-            $viewData->bolumler = $this->portfolio_model->get_all(
-                array(
-                    "category_id" => 1
-                )
-            );
 
             $this->load->model("brand_model");
             $viewData->brands = $this->brand_model->get_all(
@@ -235,12 +215,6 @@ class Teachers extends CI_Controller{
                 )
             );
 
-            $viewData->bolumler = $this->portfolio_model->get_all(
-                array(
-                    "category_id" => 1
-                )
-            );
-
             $this->load->model("brand_model");
             $viewData->brands = $this->brand_model->get_all(
                 array(
@@ -253,11 +227,6 @@ class Teachers extends CI_Controller{
             $viewData->subViewFolder = "update";
             $viewData->form_error = true;
 
-            $viewData->categories = $this->portfolio_category_model->get_all(
-                array(
-                    "isActive" => 1
-                )
-            );
 
             $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
         }
@@ -305,21 +274,6 @@ class Teachers extends CI_Controller{
                     "isActive" => $isActive,
                 )
             );
-        }
-    }
-
-    public function categoriSec($id){
-        if ($id){
-
-            $bolumler = $this->portfolio_model->get_all(
-                array(
-                    "category_id" => $id
-                )
-            );
-
-            foreach ($bolumler as $bolum ){
-                echo "<option value='$bolum->id'>".$bolum->title."</option>";
-            }
         }
     }
 
