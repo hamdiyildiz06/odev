@@ -23,7 +23,6 @@
                     <!-- Tab panes -->
 
                     <div class="tab-content p-md">
-
                         <?php $this->load->view("{$viewFolder}/{$subViewFolder}/tabs/site_info");?>
                         <?php $this->load->view("{$viewFolder}/{$subViewFolder}/tabs/address");?>
                         <?php $this->load->view("{$viewFolder}/{$subViewFolder}/tabs/about_us");?>
@@ -31,7 +30,6 @@
                         <?php $this->load->view("{$viewFolder}/{$subViewFolder}/tabs/vision");?>
                         <?php $this->load->view("{$viewFolder}/{$subViewFolder}/tabs/social_media");?>
                         <?php $this->load->view("{$viewFolder}/{$subViewFolder}/tabs/logo");?>
-
                     </div><!-- .tab-content  -->
                 </div><!-- .nav-tabs-horizontal -->
             </div><!-- .widget -->

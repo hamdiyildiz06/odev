@@ -40,12 +40,14 @@
         <div class="menubar-scroll-inner">
             <ul class="app-menu">
 
+                <?php if ($user->rutbe == 1){ ?>
                 <li>
                     <a href="<?= base_url(); ?>">
                         <i class="menu-icon zmdi zmdi-view-dashboard zmdi-hc-lg"></i>
                         <span class="menu-text">Anasayfa</span>
                     </a>
                 </li>
+                <?php } ?>
 
                 <?php if ($user->rutbe == 1){ ?>
                 <li class="has-submenu">
@@ -96,6 +98,28 @@
                     </a>
                 </li>
                 <?php } ?>
+
+                <!-- Öğrenci Menüleri -->
+
+                <?php if ($user->rutbe == 0){ ?>
+                    <li>
+                        <a href="<?= base_url(); ?>">
+                            <i class="menu-icon zmdi zmdi-view-dashboard zmdi-hc-lg"></i>
+                            <span class="menu-text">Sınav İşlemleri</span>
+                        </a>
+                    </li>
+                <?php } ?>
+
+                <?php if ($user->rutbe == 0){ ?>
+                    <li>
+                        <a href="<?= base_url("dashboard"); ?>/profilim">
+                            <i class="menu-icon zmdi zmdi-view-dashboard zmdi-hc-lg"></i>
+                            <span class="menu-text">Profilim</span>
+                        </a>
+                    </li>
+                <?php } ?>
+
+
             </ul><!-- .app-menu -->
         </div><!-- .menubar-scroll-inner -->
     </div><!-- .menubar-scroll -->

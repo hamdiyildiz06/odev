@@ -225,6 +225,25 @@ function get_brands_title($brands_id = 0){
 
 }
 
+function get_teacher($teacher_id = 0){
+
+    $t = &get_instance();
+    $t->load->model("teacher_model");
+
+    $teacher = $t->teacher_model->get(
+        array(
+            "id" => $teacher_id
+        )
+    );
+
+    if ($teacher){
+        return $teacher->title;
+    }else{
+        return "<strong style='color: red;'>Tanımlı Değil</strong>";
+    }
+
+}
+
 function upload_picture($file, $uploadPath, $width, $height, $name){
     $t = get_instance();
     $t->load->library("simpleimagelib");

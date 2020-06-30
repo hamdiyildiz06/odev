@@ -4,8 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Dashboard extends CI_Controller {
 
     public $viewFolder = "";
-//    public $user;
 
+//    public $user;
     public function __construct()
     {
         parent::__construct();
@@ -267,5 +267,20 @@ class Dashboard extends CI_Controller {
         $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
     }
 
+    public function profilim(){
+        $viewData = new stdClass();
 
+        $viewData->fakulte = count($this->portfolio_category_model->get_all());
+        $viewData->bolum = count($this->portfolio_model->get_all());
+        $viewData->sinif = count($this->brand_model->get_all());
+        $viewData->ogren = count($this->ogrenci_model->get_all());
+
+        /** View'e Gönderilecek değişkenlerin set edilmesi ..*/
+        $viewData->viewFolder    = $this->viewFolder;
+        $viewData->subViewFolder = "profilim";
+       // $viewData->items         = $items;
+
+        $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
+
+    }
 }
