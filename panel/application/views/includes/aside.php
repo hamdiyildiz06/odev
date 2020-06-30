@@ -73,12 +73,12 @@
                 <?php } ?>
 
                 <?php if ($user->rutbe == 1){ ?>
-                <li>
-                    <a href="<?= base_url("ogrenci"); ?>">
-                        <i class="menu-icon fa fa-user-secret"></i>
-                        <span class="menu-text">Ögrenci Kayıt</span>
-                    </a>
-                </li>
+                    <li>
+                        <a href="<?= base_url("ogrenci"); ?>">
+                            <i class="menu-icon fa fa-user-secret"></i>
+                            <span class="menu-text">Ögrenci Kayıt</span>
+                        </a>
+                    </li>
                 <?php } ?>
 
                 <?php if ($user->rutbe == 1){ ?>
@@ -88,6 +88,15 @@
                         <span class="menu-text">Öğretmen Kayıt</span>
                     </a>
                 </li>
+                <?php } ?>
+
+                <?php if ($user->rutbe == 1){ ?>
+                    <li>
+                        <a href="<?= base_url("lessons"); ?>">
+                            <i class="menu-icon fa fa-user-secret"></i>
+                            <span class="menu-text">Ders Kayıt</span>
+                        </a>
+                    </li>
                 <?php } ?>
 
                 <?php if ($user->rutbe == 1){ ?>
