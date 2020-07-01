@@ -7,7 +7,6 @@
     <table class="table table-bordered table-striped table-hover pictures_list">
         <thead>
         <tr>
-            <th class="w50 text-center"><i class="fa fa-reorder"></i></th>
             <th class="w50 text-center">#id</th>
             <th class="text-center">Görsel</th>
             <th>Resim Adı</th>
@@ -20,7 +19,6 @@
         <?php foreach ($item_images as $image): ?>
 
             <tr id="ord-<?= $image->id; ?>">
-                <th class="text-center"><i class="fa fa-reorder"></i></th>
                 <th class="text-center"><?= $image->id; ?></th>
                 <td class="w100 text-center">
                     <img width="30" src="<?php echo get_picture($viewFolder, $image->img_url, "255x157"); ?>" alt="" class="img-responsive">

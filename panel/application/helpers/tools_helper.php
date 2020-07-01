@@ -244,6 +244,44 @@ function get_teacher($teacher_id = 0){
 
 }
 
+function get_lesson($lesson_id = 0){
+
+    $t = &get_instance();
+    $t->load->model("lesson_model");
+
+    $lesson = $t->lesson_model->get(
+        array(
+            "id" => $lesson_id
+        )
+    );
+
+    if ($lesson){
+        return $lesson->title;
+    }else{
+        return "<strong style='color: red;'>Tanımlı Değil</strong>";
+    }
+
+}
+
+function get_student($student_id = 0){
+
+    $t = &get_instance();
+    $t->load->model("ogrenci_model");
+
+    $student = $t->ogrenci_model->get(
+        array(
+            "id" => $student_id
+        )
+    );
+
+    if ($student){
+        return $student->title;
+    }else{
+        return "<strong style='color: red;'>Tanımlı Değil</strong>";
+    }
+
+}
+
 function upload_picture($file, $uploadPath, $width, $height, $name){
     $t = get_instance();
     $t->load->library("simpleimagelib");

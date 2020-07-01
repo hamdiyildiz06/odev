@@ -18,9 +18,8 @@
                 <table class="table table-hover table-bordered table-striped content-container">
                     <thead>
                         <tr>
-                            <th class="w50 text-center"><i class="fa fa-reorder"></i></th>
                             <th class="w50">#id</th>
-                            <th>Başlık</th>
+                            <th>Öğrenci</th>
                             <th class="text-center">Fakülte</th>
                             <th class="text-center">Bölüm</th>
                             <th class="text-center">B.Türü</th>
@@ -33,9 +32,10 @@
                 <?php foreach ($items as $item): ?>
                     <?php $portfolyo = get_portfolyo($item->portfolyo_id);  ?>
                     <tr id="ord">
-                        <th class="text-center"><i class="fa fa-reorder"></i></th>
                         <th class="text-center"><?= $item->id; ?></th>
-                        <td><?= $item->title; ?></td>
+                        <td><a href="<?= base_url("Dashboard/student_classes/{$item->id}"); ?>"><?= $item->title; ?></a>
+                            
+                            </td>
                         <td class="text-center"><?=  get_category_title($item->category_id); ?></td>
                         <td class="text-center"><?= $portfolyo->title;  ?></td>
                         <td class="text-center"><?=  ($portfolyo->bolum_turu == 1) ? "N.Ö" : "İ:Ö"; ?></td>

@@ -283,4 +283,26 @@ class Dashboard extends CI_Controller {
         $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
 
     }
+
+    public function student_classes($student_id = 0){
+        $viewData = new stdClass();
+        $this->load->model("course_operation_model");
+
+
+        /** tablodan verilerin getirilmesi */
+        $items = $this->course_operation_model->get_all(
+            array(
+                "student_id" => $student_id
+            )
+        );
+
+        /** View'e Gönderilecek değişkenlerin set edilmesi ..*/
+        $viewData->viewFolder    = $this->viewFolder;
+        $viewData->subViewFolder = "student_classes";
+        $viewData->stdid         = $student_id;
+        $viewData->items         = $items;
+
+        $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
+
+    }
 }

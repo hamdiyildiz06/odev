@@ -17,7 +17,6 @@
                 <table class="table table-hover table-bordered table-striped content-container">
                     <thead>
                         <tr>
-                            <th class="w50 text-center"><i class="fa fa-reorder"></i></th>
                             <th class="w50">#id</th>
                             <th>Sınıf Adı</th>
                             <th class="text-center">Sınıf Mevcudu</th>
@@ -28,7 +27,6 @@
                     <tbody class="sortable" data-url="<?= base_url("brands/rankSetter"); ?>">
                 <?php foreach ($items as $item): ?>
                     <tr id="ord">
-                        <th class="text-center"><i class="fa fa-reorder"></i></th>
                         <th class="text-center"><?= $item->id; ?></th>
                         <td><?= $item->title; ?></td>
                         <td><?= $item->mevcut; ?></td>

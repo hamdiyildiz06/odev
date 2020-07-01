@@ -18,7 +18,6 @@
                 <table class="table table-hover table-bordered table-striped content-container">
                     <thead>
                         <tr>
-                            <th class="w50 text-center"><i class="fa fa-reorder"></i></th>
                             <th class="w50">#id</th>
                             <th>Başlık</th>
                             <th class="text-center">Sınıf</th>
@@ -29,7 +28,6 @@
                     <tbody>
                 <?php foreach ($items as $item): ?>
                     <tr id="ord">
-                        <th class="text-center"><i class="fa fa-reorder"></i></th>
                         <th class="text-center"><?= $item->id; ?></th>
                         <td><?= $item->title; ?></td>
                         <td class="text-center"><?=  get_brands_title($item->brands_id); ?></td>

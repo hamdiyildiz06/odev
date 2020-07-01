@@ -128,6 +128,15 @@
                     </li>
                 <?php } ?>
 
+                <?php if ($user->rutbe == 0){ ?>
+                    <li>
+                        <a href="<?= base_url("course_operations"); ?>">
+                            <i class="menu-icon zmdi zmdi-view-dashboard zmdi-hc-lg"></i>
+                            <span class="menu-text">Ders işlemleri</span>
+                        </a>
+                    </li>
+                <?php } ?>
+
 
             </ul><!-- .app-menu -->
         </div><!-- .menubar-scroll-inner -->
