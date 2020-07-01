@@ -52,7 +52,7 @@ class Course_operations extends CI_Controller{
         $this->load->view("{$viewData->viewFolder}/{$viewData->subViewFolder}/index", $viewData);
     }
 
-    public function save($item_id = "", $user_id = "", $master = false){
+    public function save($item_id = "", $user_id = "", $master = ""){
 
             $bul = $this->course_operation_model->get(
                 array(

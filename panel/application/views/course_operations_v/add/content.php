@@ -1,12 +1,13 @@
 <?php
 $user  = get_active_user();
 if ($stdid){
+
     $user->id = $stdid;
     $master = true;
 }else{
     $user  = get_active_user();
+    $master = false;
 }
-
 
 ?>
 <div class="row">
@@ -28,6 +29,7 @@ if ($stdid){
                     </tr>
                     </thead>
                     <tbody>
+
                     <?php foreach ($items as $item): ?>
                         <tr>
                             <th class="text-center"><?= $item->id; ?></th>
@@ -35,12 +37,12 @@ if ($stdid){
                             <td class="text-center w100">
                                 <?php
                                 if ($master == true){
-                                    $link = base_url("course_operations/save/{$item->id}/{$user->id}/{$master}");
-                                }else{
-                                    $link = base_url("course_operations/save/{$item->id}/{$user->id}");
+                                    $link = "course_operations/save/{$item->id}/{$user->id}/{$master}";
+                                }elseif($master == ""){
+                                    $link = "course_operations/save/{$item->id}/{$user->id}";
                                 }
                                 ?>
-                                <a href="<?= $link; ?>" class="btn btn-sm btn-info btn-outline"><i class="fa fa-pencil-square-o"></i> Ekle</a>
+                                <a href="<?= base_url($link); ?>" class="btn btn-sm btn-info btn-outline"><i class="fa fa-pencil-square-o"></i> Ekle</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
