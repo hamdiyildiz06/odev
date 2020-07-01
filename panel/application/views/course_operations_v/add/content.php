@@ -13,7 +13,7 @@ if ($stdid){
 
     <div class="col-md-12">
         <h4 class="m-b-lg">
-            Yeni Ders Ekle <?= $stdid; ?>
+            Yeni Ders Ekle
         </h4>
     </div><!-- END column -->
     <div class="col-md-12">
@@ -33,7 +33,14 @@ if ($stdid){
                             <th class="text-center"><?= $item->id; ?></th>
                             <td><?= $item->title; ?></td>
                             <td class="text-center w100">
-                                <a href="<?= base_url("course_operations/save/{$item->id}/{$user->id}/{$master}"); ?>" class="btn btn-sm btn-info btn-outline"><i class="fa fa-pencil-square-o"></i> Ekle</a>
+                                <?php
+                                if ($master == true){
+                                    $link = base_url("course_operations/save/{$item->id}/{$user->id}/{$master}");
+                                }else{
+                                    $link = base_url("course_operations/save/{$item->id}/{$user->id}");
+                                }
+                                ?>
+                                <a href="<?= $link; ?>" class="btn btn-sm btn-info btn-outline"><i class="fa fa-pencil-square-o"></i> Ekle</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
